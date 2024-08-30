@@ -8,7 +8,7 @@ export default function ImageDarkMode() {
       {colorMode === "light" ? (
         <Image src="/SyncSnackLogo.png" />
       ) : (
-        <Image src="/SyncSnackLogoDarkMode.png" />
+        <Image src="/whitelogo.png" />
       )}
     </>
   );
