@@ -14,12 +14,15 @@
     "SetUpProfilePage": {
       "title": "Register",
       "loading": "Loading..."
+      
     },
 
     "SetProfileComponentPage": {
       "BackButton": "Back",
       "SetupProfile": "Setup Profile",
-      "Next": "Next"
+      "Next": "Next",
+      "stepOneTitle": "User",
+      "stepTwoTitle": "Group"
     },
 
     "StepOneUserProfile": {

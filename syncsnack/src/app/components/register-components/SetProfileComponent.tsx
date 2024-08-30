@@ -6,13 +6,16 @@ import GroupInformation from './step-two/GroupInformation';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
-const steps = [
-    { title: 'User Profile', component: UserProfile },
-    { title: 'Group Information', component: GroupInformation },
-  ];
+
 
 export default function SetProfileComponent() {
+
     const t = useTranslations("SetProfileComponentPage");
+
+    const steps = [
+      { title: t('stepOneTitle'), component: UserProfile },
+      { title: t('stepTwoTitle'), component: GroupInformation },
+      ];
 
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
