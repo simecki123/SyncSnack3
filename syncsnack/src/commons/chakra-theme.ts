@@ -1,4 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
+import "@fontsource/titillium-web";
+import "@fontsource/lilita-one";
 
 export const theme = extendTheme({
   colors: {
@@ -29,5 +31,9 @@ export const theme = extendTheme({
       600: "#681615",
       700: "#000000",
     },
+  },
+  fonts: {
+    body: `'Titillium Web', sans-serif`,
+    heading: `'Lilita One', system-ui`,
   },
 });

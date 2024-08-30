@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Providers from "../components/Providers";
 import { ColorModeScript } from "@chakra-ui/react";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,9 +21,8 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body className="">
         <NextIntlClientProvider messages={messages}>
-          <ColorModeScript initialColorMode={"light"} />
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
