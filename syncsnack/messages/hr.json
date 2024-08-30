@@ -37,5 +37,12 @@
       "GroupPassword": "Lozinka grupe",
       "GroupDescription": "Opis grupe"
 
+    },
+
+    "ChangePasswordPage": {
+      "title": "Resetirajte lozinku",
+      "enterPassword": "Unesite novui lozinku ",
+      "confirmPassword": "Potvrdite novu lozinku",
+      "resetPasswdButton": "Resetirajte lozinku"
     }
   }

@@ -38,6 +38,13 @@
       "GroupPassword": "Group password",
       "GroupDescription": "Group description"
 
+    },
+
+    "ChangePasswordPage": {
+      "title": "Reset Your Password",
+      "enterPassword": "Enter your new password",
+      "confirmPassword": "Confirm your new password",
+      "resetPasswdButton": "Reset Password"
     }
 
   }
