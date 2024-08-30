@@ -19,5 +19,5 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   // Match root, login, and internationalized pathnames
-  matcher: ['/', '/login', '/(hr|en)/:path*'],
+  matcher: ['/', '/login', '/register', '/(hr|en)/:path*'],
 };
