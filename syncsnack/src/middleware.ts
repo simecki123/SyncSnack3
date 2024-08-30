@@ -8,7 +8,7 @@ export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Check if the user is on the root path
-  if (pathname === "/") {
+  if (pathname === "/" || pathname === "/en" || pathname === "/hr") {
     // Redirect to the login page
     return NextResponse.redirect(new URL("/login", request.url));
   }
