@@ -1,5 +1,5 @@
 import SetProfileComponent from '@/app/components/register-components/SetProfileComponent'
-import { Box, Container, Heading } from '@chakra-ui/react'
+import { Box, Container, Flex, Heading } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import React, { Suspense } from 'react'
 
@@ -8,7 +8,12 @@ export default function SetUpProfilePage() {
     const t = useTranslations('SetUpProfilePage');
     
   return (
-    <Box position="relative" minHeight="100vh" overflow="hidden" className="bg-prim-cl">
+    <Flex 
+            minHeight="100vh" 
+            width="100%" 
+            alignItems="center" 
+            justifyContent="center"
+        >
       <Container className="bg-prim-cl" maxW="container.md" py={8}>
         <Box textAlign="center" mb={8}>
           <Heading as="h1" size="xl">
@@ -19,6 +24,6 @@ export default function SetUpProfilePage() {
           <SetProfileComponent />
         </Suspense>
       </Container>
-    </Box>
+    </Flex>
   )
 }
