@@ -1,5 +1,38 @@
 {
     "HomePage": {
       "title": "Nema ništa za vidjeti ovdje."
+    },
+
+    "RegisterPage": {
+      "title": "Registracija",
+      "email": "E-adresa",
+      "password": "Lozinka",
+      "confirmPassword": "Potvrdi lozinku"
+    },
+
+    "SetUpProfilePage": {
+      "title": "Registracija",
+      "loading": "Učitavanje..."
+    },
+
+    "SetProfileComponentPage": {
+      "BackButton": "Nazad",
+      "SetupProfile": "Postavi profil",
+      "Next": "Dalje"
+    },
+
+    "StepOneUserProfile": {
+      "firstName": "Ime",
+      "lastName": "Prezime"
+    },
+
+    "StepTwoGroupInformaiton": {
+      "GroupChoice": "Izbor grupe",
+      "JoinGroup": "Pridruži se grupi",
+      "CreateGroup": "Stvori grupu",
+      "GroupName": "Ime grupe",
+      "GroupPassword": "Lozinka grupe",
+      "GroupDescription": "Opis grupe"
+
     }
   }

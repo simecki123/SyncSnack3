@@ -2,5 +2,39 @@
     "HomePage": {
       "title": "Nothing to see here."
       
+    },
+
+    "RegisterPage": {
+      "title": "Register",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+
+    "SetUpProfilePage": {
+      "title": "Register",
+      "loading": "Loading..."
+    },
+
+    "SetProfileComponentPage": {
+      "BackButton": "Back",
+      "SetupProfile": "Setup Profile",
+      "Next": "Next"
+    },
+
+    "StepOneUserProfile": {
+      "firstName": "First name",
+      "lastName": "Last name"
+    },
+
+    "StepTwoGroupInformaiton": {
+      "GroupChoice": "Group choice",
+      "JoinGroup": "Join group",
+      "CreateGroup": "Create group",
+      "GroupName": "Group name",
+      "GroupPassword": "Group password",
+      "GroupDescription": "Group description"
+
     }
+
   }
