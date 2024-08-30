@@ -183,7 +183,7 @@ export default function SetProfileComponent() {
 
   return (
     
-        <Box className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+        <Box className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
           <Stepper index={activeStep} className="mb-8">
             {steps.map((step, index) => (
               <Step key={index}>
