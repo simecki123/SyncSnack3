@@ -1,7 +1,6 @@
 {
     "HomePage": {
       "title": "Nothing to see here."
-      
     },
 
     "RegisterPage": {
@@ -47,4 +46,9 @@
       "resetPasswdButton": "Reset Password"
     }
 
-  }
+    "LoginPage": {
+      "Login": "Log in",
+      "Forgotpassword": "Forgot password",
+      "CreateAccount": "Create Account"
+    }
+}

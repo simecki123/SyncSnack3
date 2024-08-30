@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Providers from "../components/Providers";
 import { ColorModeScript } from "@chakra-ui/react";
+import Footer from "../components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,12 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className="">
         <NextIntlClientProvider messages={messages}>
-          <Providers>{children}</Providers>
+          <Providers>
+            <div>{children}</div>
+            <div className="absolute bottom-0 left-0 bg-gray-600 w-full">
+              <Footer />
+            </div>
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>

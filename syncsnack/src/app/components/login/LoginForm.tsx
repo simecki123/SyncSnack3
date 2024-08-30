@@ -1,8 +1,9 @@
 "use client";
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, Text } from "@chakra-ui/react";
 import PasswordInput from "./PasswordInput";
 import { useFormState } from "react-dom";
 import { handleLogin } from "@/app/server-actions/login";
+import { useTranslations } from "next-intl";
 
 /**
  * Login form component for the login page.
@@ -16,6 +17,7 @@ const initialState: any = {
 };
 
 export default function LoginForm() {
+  const t = useTranslations("LoginPage");
   const [state, formAction] = useFormState(handleLogin, initialState);
 
   console.log(state);
@@ -29,9 +31,9 @@ export default function LoginForm() {
         className="mb-2"
       />
       <PasswordInput />
-      {state && state.message}
+      {state && <Text textColor={"red.500"}>{state.message}</Text>}
       <Button type="submit" className="w-full mt-4" colorScheme="xblue">
-        Log in
+        {t("Login")}
       </Button>
     </form>
   );

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "./routing";
 
@@ -8,9 +8,9 @@ export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Check if the user is on the root path
-  if (pathname === '/') {
+  if (pathname === "/") {
     // Redirect to the login page
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   // For all other routes, use the intl middleware
@@ -19,5 +19,12 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   // Match root, login, and internationalized pathnames
-  matcher: ['/', '/login', '/register', '/setprofile', '/change-password', '/(hr|en)/:path*'],
+  matcher: [
+    "/",
+    "/login",
+    "/register",
+    "/setprofile",
+    "/change-password",
+    "/(hr|en)/:path*",
+  ],
 };

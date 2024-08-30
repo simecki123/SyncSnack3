@@ -1,4 +1,6 @@
 "use server";
+import { signIn } from "@/commons/auth";
+import { redirect } from "next/navigation";
 import z from "zod";
 
 export async function handleLogin(prevState: any, formData: FormData) {
@@ -15,7 +17,17 @@ export async function handleLogin(prevState: any, formData: FormData) {
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Invalid credentials",
     };
-  } else {
-    signIn;
   }
+  try {
+    await signIn("credentials", {
+      email: validatedFields.data.email,
+      password: validatedFields.data.password,
+      redirect: false,
+    });
+  } catch (e: any) {
+    return {
+      message: "Wrong credentials",
+    };
+  }
+  redirect("/home");
 }

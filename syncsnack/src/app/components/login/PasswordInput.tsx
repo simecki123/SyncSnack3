@@ -1,5 +1,6 @@
 "use client";
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
 export default function PasswordInput() {
@@ -17,7 +18,11 @@ export default function PasswordInput() {
       />
       <InputRightElement width="4.5rem">
         <Button h="1.75rem" size="sm" onClick={handleClick}>
-          {show ? "Hide" : "Show"}
+          {show ? (
+            <EyeIcon className="size-5" />
+          ) : (
+            <EyeSlashIcon className="size-5" />
+          )}
         </Button>
       </InputRightElement>
     </InputGroup>
