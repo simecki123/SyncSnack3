@@ -44,7 +44,7 @@
       "enterPassword": "Enter your new password",
       "confirmPassword": "Confirm your new password",
       "resetPasswdButton": "Reset Password"
-    }
+    },
 
     "LoginPage": {
       "Login": "Log in",

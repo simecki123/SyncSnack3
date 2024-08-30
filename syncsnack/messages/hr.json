@@ -39,17 +39,16 @@
 
     },
 
-<<<<<<< HEAD
     "ChangePasswordPage": {
       "title": "Resetirajte lozinku",
       "enterPassword": "Unesite novui lozinku ",
       "confirmPassword": "Potvrdite novu lozinku",
       "resetPasswdButton": "Resetirajte lozinku"
-=======
+    },
+
     "LoginPage": {
       "Login": "Ulogiraj se",
       "Forgotpassword": "Zaboravljena lozinka?",
       "CreateAccount": "Novi Račun"
->>>>>>> 4fd156b (login page dark mode)
     }
   }
