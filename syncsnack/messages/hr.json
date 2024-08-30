@@ -13,12 +13,15 @@
     "SetUpProfilePage": {
       "title": "Registracija",
       "loading": "Učitavanje..."
+      
     },
 
     "SetProfileComponentPage": {
       "BackButton": "Nazad",
       "SetupProfile": "Postavi profil",
-      "Next": "Dalje"
+      "Next": "Dalje",
+      "stepOneTitle": "Profil",
+      "stepTwoTitle": "Grupa"
     },
 
     "StepOneUserProfile": {
