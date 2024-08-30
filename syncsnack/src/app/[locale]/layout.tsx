@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import Providers from "../components/Providers";
+import { ColorModeScript } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,19 +15,19 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params: {locale}
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string};
+  params: { locale: string };
 }>) {
-
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <ColorModeScript initialColorMode={"light"} />
+          <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>
