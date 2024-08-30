@@ -1,3 +1,4 @@
+import ImageDarkMode from "@/app/components/login/ImageDarkMode";
 import LoginForm from "@/app/components/login/LoginForm";
 import {
   Box,
@@ -19,6 +20,7 @@ export default async function LoginPage() {
       h-screen"
     >
       <Heading>SyncSnack</Heading>
+      <ImageDarkMode />
       <Box
         className="shadow-lg p-6 rounded-md flex flex-col
         items-center mt-5"

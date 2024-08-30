@@ -29,6 +29,7 @@ export default function LoginForm() {
         name="email"
         focusBorderColor="xblue.500"
         className="mb-2"
+        placeholder="Email"
       />
       <PasswordInput />
       {state && <Text textColor={"red.500"}>{state.message}</Text>}

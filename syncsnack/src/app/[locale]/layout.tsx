@@ -22,13 +22,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className="">
+      <body className="h-screen">
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <div>{children}</div>
-            <div className="absolute bottom-0 left-0 bg-gray-600 w-full">
-              <Footer />
-            </div>
+            <Footer />
           </Providers>
         </NextIntlClientProvider>
       </body>

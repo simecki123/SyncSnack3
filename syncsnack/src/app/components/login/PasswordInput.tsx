@@ -12,7 +12,7 @@ export default function PasswordInput() {
       <Input
         pr="4.5rem"
         type={show ? "text" : "password"}
-        placeholder="Enter password"
+        placeholder="Password"
         name="password"
         id="password"
       />
