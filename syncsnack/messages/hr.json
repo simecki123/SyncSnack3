@@ -50,5 +50,15 @@
       "Login": "Ulogiraj se",
       "Forgotpassword": "Zaboravljena lozinka?",
       "CreateAccount": "Novi Račun"
+    },
+
+    "Footer": {
+      "SignOutButton": "Odjavi se"
+    },
+
+    "GroupJoinCreateModal": {
+      "Header": "Opcije",
+      "Tab1": "Učlani se",
+      "Tab2": "Kreiraj grupu"
     }
   }

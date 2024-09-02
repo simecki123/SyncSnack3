@@ -1,38 +1,23 @@
-"use client";
+import { Box } from "@chakra-ui/react";
+import SignOutButton from "./SignOutButton";
+import FooterLanguageButtons from "./FooterLanguageButtons";
+import SwitchColorThemeButton from "./SwitchColorThemeButton";
+import { auth } from "@/commons/auth";
 
-import { Box, Button, IconButton, useColorMode } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import clsx from "clsx";
-import { usePathname, useRouter } from "next/navigation";
-import { pathToFileURL } from "url";
-
-export default function Footer() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const router = useRouter();
-  const pathname = usePathname();
+export default async function Footer() {
+  let isSignOutButtonVisible = false;
+  const session = await auth();
+  const activeUser: any = session?.user;
+  if (!!activeUser) {
+    isSignOutButtonVisible = true;
+  }
 
   return (
     <Box className="absolute bottom-0 left-0 w-full">
       <Box className="flex p-2 justify-end space-x-2">
-        <Button
-          onClick={() =>
-            router.push(`/hr${pathname.slice(3, pathname.length)}`)
-          }
-        >
-          hr
-        </Button>
-        <Button
-          onClick={() =>
-            router.push(`/en${pathname.slice(3, pathname.length)}`)
-          }
-        >
-          en
-        </Button>
-        <IconButton
-          aria-label="Search database"
-          onClick={toggleColorMode}
-          icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-        />
+        {isSignOutButtonVisible && <SignOutButton />}
+        <FooterLanguageButtons />
+        <SwitchColorThemeButton />
       </Box>
     </Box>
   );

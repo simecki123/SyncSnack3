@@ -1,3 +1,4 @@
+
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Box, useToast, Button, FormControl, FormLabel, Flex, Input } from '@chakra-ui/react';
@@ -8,6 +9,7 @@ import { handleRegisterUser } from '@/app/server-actions/registerUser';
 
 export default function RegisterComponent() {
   const t = useTranslations('RegisterPage');
+
   const toast = useToast();
   
   const initialState: any = {
@@ -16,9 +18,9 @@ export default function RegisterComponent() {
   };
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -29,6 +31,7 @@ export default function RegisterComponent() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
 
   // Validate form
   useEffect(() => {
@@ -111,6 +114,7 @@ export default function RegisterComponent() {
           </Button>
         </Flex>
       </form>
+
     </Box>
   );
 }
