@@ -2,10 +2,10 @@
 import { Box, Button, FormControl, FormLabel, Input, Text, VStack, useToast } from '@chakra-ui/react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { handleChangePassword } from '@/app/server-actions/changePassword';
-import CustomPasswordInput from './changePasswordInput';
+import CustomPasswordInput from './CustomPasswordInput';
 
 const initialState: any = {
   message: null,
@@ -17,6 +17,20 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
   
   const [state, formAction] = useFormState(handleChangePassword, initialState);
 
+  // State to manage input values and button enabled state
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  // Effect to check if the button should be enabled
+  useEffect(() => {
+    if (newPassword && confirmPassword && newPassword === confirmPassword) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [newPassword, confirmPassword]);
+
   return (
     <form action={formAction}>
       <VStack spacing={4}>
@@ -25,7 +39,12 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
             <FormLabel>
               {t('enterPassword')}:
             </FormLabel>
-            <CustomPasswordInput name="newPassword" id="newPassword" />
+            <CustomPasswordInput 
+              name="newPassword" 
+              id="newPassword" 
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
           </FormControl>
         </Box>
 
@@ -34,7 +53,12 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
             <FormLabel>
               {t('confirmPassword')}:
             </FormLabel>
-            <CustomPasswordInput name="confirmPassword" id="confirmPassword" />
+            <CustomPasswordInput 
+              name="confirmPassword" 
+              id="confirmPassword" 
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
           </FormControl>
         </Box>
 
@@ -45,6 +69,7 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
           colorScheme="xblue"
           width="100%"
           mt={4}
+          isDisabled={isButtonDisabled} // Button is disabled if passwords don't match
         >
           {t('resetPasswdButton')}
         </Button>
