@@ -21,7 +21,7 @@ export default async function ForgotPasswordPage({ searchParams }: { searchParam
                 <Heading as="h1" size="xl" textAlign="center" >
                     {t('title')}
                 </Heading>
-                <Box bg="white" p={8} borderRadius="lg" boxShadow="lg">
+                <Box  p={8} borderRadius="lg" boxShadow="lg">
                     <PasswordResetForm searchParams={searchParams} />
                 </Box>
                 </VStack>

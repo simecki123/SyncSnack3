@@ -7,7 +7,7 @@ export default async function RegisterPage() {
   const t = await getTranslations("RegisterPage");
 
   return (
-    <Flex
+    <Flex 
       minHeight="100vh"
       width="100%"
       alignItems="center"
