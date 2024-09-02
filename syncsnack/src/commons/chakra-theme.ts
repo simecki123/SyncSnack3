@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, Input } from "@chakra-ui/react";
 import "@fontsource/titillium-web";
 import "@fontsource/lilita-one";
 
@@ -34,6 +34,6 @@ export const theme = extendTheme({
   },
   fonts: {
     body: `'Titillium Web', sans-serif`,
-    heading: `'Lilita One', system-ui`,
-  },
+    heading: `'Lilita One', system-ui`
+  }
 });

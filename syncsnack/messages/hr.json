@@ -41,7 +41,7 @@
 
     "ChangePasswordPage": {
       "title": "Resetirajte lozinku",
-      "enterPassword": "Unesite novui lozinku ",
+      "enterPassword": "Unesite novu lozinku ",
       "confirmPassword": "Potvrdite novu lozinku",
       "resetPasswdButton": "Resetirajte lozinku"
     },
