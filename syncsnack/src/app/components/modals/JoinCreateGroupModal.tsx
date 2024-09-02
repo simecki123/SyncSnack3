@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import CreateGroupForm from "../forms/CreateGroupForm";
 
 export default function JoinCreateGroupModal({ isOpen, onClose }: any) {
   const t = useTranslations("GroupJoinCreateModal");
@@ -21,7 +22,7 @@ export default function JoinCreateGroupModal({ isOpen, onClose }: any) {
         <ModalHeader>{t("Header")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Tabs isFitted variant="enclosed">
+          <Tabs isFitted variant="enclosed" colorScheme="xblue">
             <TabList mb="1em">
               <Tab>{t("Tab1")}</Tab>
               <Tab>{t("Tab2")}</Tab>
@@ -31,18 +32,11 @@ export default function JoinCreateGroupModal({ isOpen, onClose }: any) {
                 <p>one!</p>
               </TabPanel>
               <TabPanel>
-                <p>two!</p>
+                <CreateGroupForm onClose={onClose} />
               </TabPanel>
             </TabPanels>
           </Tabs>
         </ModalBody>
-
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
-          </Button>
-          <Button variant="ghost">Secondary Action</Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );

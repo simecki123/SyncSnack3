@@ -5,17 +5,16 @@ import { useFormState } from "react-dom";
 import { handleLogin } from "@/app/server-actions/login";
 import { useTranslations } from "next-intl";
 
-/**
- * Login form component for the login page.
- * Uses zod for validation.
- * @author Andrija
- */
-
 const initialState: any = {
   message: null,
   errors: null,
 };
 
+/**
+ * Login form component for the login page.
+ * Uses zod for validation.
+ * @author Andrija
+ */
 export default function LoginForm() {
   const t = useTranslations("LoginPage");
   const [state, formAction] = useFormState(handleLogin, initialState);
