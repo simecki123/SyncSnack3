@@ -20,6 +20,8 @@ export async function handleChangePassword(prevState: any, formData: FormData) {
     resetCode: z.string(),
   });
 
+  console.log("passw: ", formData.get("confirmPassword"))
+
   /**
    * Validate fields will make sure all data that is needed for updating password is ready
    */

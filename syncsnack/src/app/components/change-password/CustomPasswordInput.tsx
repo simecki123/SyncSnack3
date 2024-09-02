@@ -7,9 +7,17 @@ interface CustomPasswordInputProps {
   name: string;
   id?: string;
   placeholder?: string;
+  value: string; // Added value prop
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Added onChange prop
 }
 
-export default function CustomPasswordInput({ name, id, placeholder = "Password" }: CustomPasswordInputProps) {
+export default function CustomPasswordInput({
+  name,
+  id,
+  placeholder = "Password",
+  value,
+  onChange,
+}: CustomPasswordInputProps) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -18,9 +26,11 @@ export default function CustomPasswordInput({ name, id, placeholder = "Password"
       <Input
         pr="4.5rem"
         type={show ? "text" : "password"}
-        placeholder={placeholder}
         name={name}
         id={id || name} // If id is not provided, use name as fallback
+        placeholder={placeholder}
+        value={value} // Bind value to input field
+        onChange={onChange} // Attach onChange handler
       />
       <InputRightElement width="4.5rem">
         <Button h="1.75rem" size="sm" onClick={handleClick}>
