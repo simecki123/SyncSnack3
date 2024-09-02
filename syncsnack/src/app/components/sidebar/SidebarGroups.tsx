@@ -9,7 +9,9 @@ import SidebarGroupDrawer from "./SidebarDrawer";
  * @todo fetch user groups and show them here
  * @todo button for creating or joining a group
  */
-export default function SidebarGroups() {
+export default function SidebarGroups({ groups }: any) {
+  console.log(groups, "groups in the sidebar");
+
   /**
    * This is used for group links drawer
    * @see https://v2.chakra-ui.com/docs/components/drawer

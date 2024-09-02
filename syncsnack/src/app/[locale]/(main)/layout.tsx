@@ -18,7 +18,7 @@ export default async function Layout({
   return (
     <Box className="flex h-screen items-stretch">
       <Box>
-        <SidebarGroups />
+        <SidebarGroups groups={activeUser.groupMembershipData} />
       </Box>
       <Box className="grow">{children}</Box>
     </Box>
