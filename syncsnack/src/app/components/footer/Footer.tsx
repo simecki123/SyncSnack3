@@ -12,35 +12,28 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <div
-      className={clsx("absolute bottom-0 left-0 w-full", {
-        "bg-gray-100": colorMode === "light",
-        "bg-gray-800": colorMode === "dark",
-      })}
-    >
-      <Box className="flex p-2 justify-between">
+    <Box className="absolute bottom-0 left-0 w-full">
+      <Box className="flex p-2 justify-end space-x-2">
+        <Button
+          onClick={() =>
+            router.push(`/hr${pathname.slice(3, pathname.length)}`)
+          }
+        >
+          hr
+        </Button>
+        <Button
+          onClick={() =>
+            router.push(`/en${pathname.slice(3, pathname.length)}`)
+          }
+        >
+          en
+        </Button>
         <IconButton
           aria-label="Search database"
           onClick={toggleColorMode}
           icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
         />
-        <Box className="flex justify-end space-x-2">
-          <Button
-            onClick={() =>
-              router.push(`/hr${pathname.slice(3, pathname.length)}`)
-            }
-          >
-            hr
-          </Button>
-          <Button
-            onClick={() =>
-              router.push(`/en${pathname.slice(3, pathname.length)}`)
-            }
-          >
-            en
-          </Button>
-        </Box>
       </Box>
-    </div>
+    </Box>
   );
 }

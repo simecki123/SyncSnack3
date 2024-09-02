@@ -25,6 +25,7 @@ export default async function RootLayout({
       <body className="h-screen">
         <NextIntlClientProvider messages={messages}>
           <Providers>
+            <ColorModeScript initialColorMode={"light"} />
             <div>{children}</div>
             <Footer />
           </Providers>

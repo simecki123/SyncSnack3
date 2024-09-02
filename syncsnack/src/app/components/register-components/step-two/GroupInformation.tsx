@@ -1,25 +1,35 @@
-import { FormControl, FormLabel, Input, Radio, RadioGroup, Stack } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Radio,
+  RadioGroup,
+  Stack,
+} from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
+export default function GroupInformation({ formData, handleInputChange }: any) {
+  const t = useTranslations("StepTwoGroupInformaiton");
 
-export default function GroupInformation ({ formData, handleInputChange }: any)  {
-    const t = useTranslations('StepTwoGroupInformaiton');
-
-    return(
+  return (
     <>
       <FormControl className="mb-4">
-        <FormLabel>{t('GroupChoice')}</FormLabel>
-        <RadioGroup name="groupChoice" value={formData.groupChoice} onChange={handleInputChange}>
+        <FormLabel>{t("GroupChoice")}</FormLabel>
+        <RadioGroup
+          name="groupChoice"
+          value={formData.groupChoice}
+          onChange={handleInputChange}
+        >
           <Stack direction="row">
-            <Radio value="join">{t('JoinGroup')}</Radio>
-            <Radio value="create">{t('CreateGroup')}</Radio>
+            <Radio value="join">{t("JoinGroup")}</Radio>
+            <Radio value="create">{t("CreateGroup")}</Radio>
           </Stack>
         </RadioGroup>
       </FormControl>
-      {formData.groupChoice === 'join' && (
+      {formData.groupChoice === "join" && (
         <>
           <FormControl className="mb-4">
-            <FormLabel>{t('GroupName')}</FormLabel>
+            <FormLabel>{t("GroupName")}</FormLabel>
             <Input
               name="groupName"
               value={formData.groupName}
@@ -27,7 +37,7 @@ export default function GroupInformation ({ formData, handleInputChange }: any) 
             />
           </FormControl>
           <FormControl className="mb-4">
-            <FormLabel>{t('GroupPassword')}</FormLabel>
+            <FormLabel>{t("GroupPassword")}</FormLabel>
             <Input
               name="groupPassword"
               value={formData.groupPassword}
@@ -37,10 +47,10 @@ export default function GroupInformation ({ formData, handleInputChange }: any) 
           </FormControl>
         </>
       )}
-      {formData.groupChoice === 'create' && (
+      {formData.groupChoice === "create" && (
         <>
           <FormControl className="mb-4">
-            <FormLabel>{t('GroupName')}</FormLabel>
+            <FormLabel>{t("GroupName")}</FormLabel>
             <Input
               name="groupName"
               value={formData.groupName}
@@ -48,7 +58,7 @@ export default function GroupInformation ({ formData, handleInputChange }: any) 
             />
           </FormControl>
           <FormControl className="mb-4">
-            <FormLabel>{t('GroupDescription')}</FormLabel>
+            <FormLabel>{t("GroupDescription")}</FormLabel>
             <Input
               name="groupDescription"
               value={formData.groupDescription}
@@ -56,7 +66,7 @@ export default function GroupInformation ({ formData, handleInputChange }: any) 
             />
           </FormControl>
           <FormControl className="mb-4">
-            <FormLabel>{t('GroupPassword')}</FormLabel>
+            <FormLabel>{t("GroupPassword")}</FormLabel>
             <Input
               name="groupPassword"
               value={formData.groupPassword}
@@ -67,6 +77,6 @@ export default function GroupInformation ({ formData, handleInputChange }: any) 
         </>
       )}
     </>
-  
-    );
-  }
+  );
+}
+

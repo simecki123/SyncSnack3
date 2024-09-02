@@ -5,9 +5,9 @@ import "@fontsource/lilita-one";
 export const theme = extendTheme({
   colors: {
     xblue: {
-      100: "#5078bf",
-      200: "#5078bf",
-      300: "#5078bf",
+      100: "#759feb",
+      200: "#618ad4",
+      300: "#5b86d4",
       400: "#5078bf",
       500: "#15408c",
       600: "#0d2b68",

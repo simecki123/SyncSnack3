@@ -24,6 +24,8 @@ export const config = {
     "/login",
     "/register",
     "/setprofile",
+    "/group-events",
+    "/orders",
     "/change-password",
     "/(hr|en)/:path*",
   ],
