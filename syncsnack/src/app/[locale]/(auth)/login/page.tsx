@@ -1,26 +1,21 @@
 import ImageDarkMode from "@/app/components/login/ImageDarkMode";
 import LoginForm from "@/app/components/login/LoginForm";
 import NextLink from "next/link";
-import {
-  Box,
-  Button,
-  Divider,
-  Heading,
-  Image,
-  Link,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, Heading, Link } from "@chakra-ui/react";
 import { getTranslations } from "next-intl/server";
+import { auth } from "@/commons/auth";
+import { redirect } from "next/navigation";
 
 export default async function LoginPage() {
   const t = await getTranslations("LoginPage");
+  const session = await auth();
+
+  if (!!session?.user) {
+    redirect("/group-events");
+  }
 
   return (
-    <Box
-      className="pt-4 flex flex-col items-center
-      h-screen"
-      borderWidth="1px"
-    >
+    <Box className="pt-4 flex flex-col items-center h-screen" borderWidth="1px">
       <Heading>SyncSnack</Heading>
       <ImageDarkMode />
       <Box

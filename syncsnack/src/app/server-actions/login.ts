@@ -29,5 +29,5 @@ export async function handleLogin(prevState: any, formData: FormData) {
       message: "Wrong credentials",
     };
   }
-  redirect("/home");
+  redirect("/group-events");
 }

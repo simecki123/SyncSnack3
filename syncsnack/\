@@ -1,0 +1,6 @@
+AUTH_SECRET="ok8zYZJUqqjO/Tlq0rPuN/23oKk9l8vF7fr9aH5edvE=" 
+
+BACKEND_URL="http://localhost:8080"
+
+NEXT_PUBLIC_BACKEND_URL="http://localhost:8080"
+
