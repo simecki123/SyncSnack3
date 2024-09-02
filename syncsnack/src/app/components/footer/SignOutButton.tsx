@@ -1,8 +1,11 @@
 "use client";
 import { Button } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export default function SignOutButton() {
+  const t = useTranslations("Footer");
+
   const handleSignOut = async () => {
     console.log("signing out");
     await signOut({
@@ -11,5 +14,5 @@ export default function SignOutButton() {
     });
   };
 
-  return <Button onClick={handleSignOut}>Sign out</Button>;
+  return <Button onClick={handleSignOut}>{t("SignOutButton")}</Button>;
 }

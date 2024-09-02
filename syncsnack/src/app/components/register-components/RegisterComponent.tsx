@@ -1,18 +1,25 @@
-'use client';
-import React, { useState } from 'react'
-import { Box, useToast, Button, FormControl, FormLabel, Input, Flex } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
+"use client";
+import React, { useState } from "react";
+import {
+  Box,
+  useToast,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Flex,
+} from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 export default function RegisterComponent() {
+  const t = useTranslations("RegisterPage");
 
-  const t = useTranslations('RegisterPage');
-  
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   // Set new values of email and password
@@ -22,14 +29,18 @@ export default function RegisterComponent() {
   };
 
   // Function to show some toast ---> possible to make separate file for toasts...****
-  const showToast = (title: string, description: string, status: 'success' | 'error' | 'info' | 'warning') => {
+  const showToast = (
+    title: string,
+    description: string,
+    status: "success" | "error" | "info" | "warning",
+  ) => {
     toast({
       title,
       description,
       status,
       duration: 5000,
       isClosable: true,
-      position: 'top',
+      position: "top",
     });
   };
 
@@ -40,53 +51,62 @@ export default function RegisterComponent() {
     try {
       const isEmailValid = await isUserEmailValid();
       if (isEmailValid) {
-        showToast('Error', "Your email is not valid", 'error');
+        showToast("Error", "Your email is not valid", "error");
         return;
       }
 
       const userData = await registerUser();
 
       if (!userData.userId) {
-        showToast('Error', 'Failed to register user', 'error');
+        showToast("Error", "Failed to register user", "error");
         return;
       }
 
-      showToast('Success', 'We have sent you an email verification. Please verify your email.', 'success');
+      showToast(
+        "Success",
+        "We have sent you an email verification. Please verify your email.",
+        "success",
+      );
       // setTimeout(() => {
       //   router.push('https://mail.google.com/mail/u/0/#inbox');
       // }, 2000);
     } catch (error: any) {
-      if (error.message === 'EmailAlreadyInUse') {
-        showToast('Error', 'This email is already in use.', 'error');
+      if (error.message === "EmailAlreadyInUse") {
+        showToast("Error", "This email is already in use.", "error");
       } else {
-        console.error('Registration error:', error);
-        showToast('Error', 'An unexpected error occurred. Please try again.', 'error');
+        console.error("Registration error:", error);
+        showToast(
+          "Error",
+          "An unexpected error occurred. Please try again.",
+          "error",
+        );
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-
   // Finally separate function that handles registering of the user after all checks are passed in handle submit
   const registerUser = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      },
+    );
 
     if (response.status === 400) {
-      throw new Error('EmailAlreadyInUse');
+      throw new Error("EmailAlreadyInUse");
     }
 
     if (!response.ok) {
-      throw new Error('Failed to register user');
+      throw new Error("Failed to register user");
     }
-
 
     return response.json();
   };
@@ -100,10 +120,13 @@ export default function RegisterComponent() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/check`, {
-        method: 'GET',
-        body: formData.email,
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/check`,
+        {
+          method: "GET",
+          body: formData.email,
+        },
+      );
 
       return response.ok;
     } catch {
@@ -114,7 +137,7 @@ export default function RegisterComponent() {
   return (
     <Box className="max-w-md mx-auto mt-10 p-6  rounded-lg shadow-md">
       <FormControl className="mb-4">
-        <FormLabel>{t('email')}: </FormLabel>
+        <FormLabel>{t("email")}: </FormLabel>
         <Input
           id="email"
           name="email"
@@ -123,11 +146,10 @@ export default function RegisterComponent() {
           className="mb-2"
           value={formData.email}
           onChange={handleInputChange}
-          
         />
       </FormControl>
       <FormControl className="mb-4">
-        <FormLabel>{t('password')}: </FormLabel>
+        <FormLabel>{t("password")}: </FormLabel>
         <Input
           name="password"
           value={formData.password}
@@ -137,7 +159,7 @@ export default function RegisterComponent() {
         />
       </FormControl>
       <FormControl className="mb-4">
-        <FormLabel>{t('confirmPassword')}: </FormLabel>
+        <FormLabel>{t("confirmPassword")}: </FormLabel>
         <Input
           name="confirmPassword"
           value={formData.confirmPassword}
@@ -150,13 +172,20 @@ export default function RegisterComponent() {
         <Button
           colorScheme="xblue"
           onClick={handleSubmit}
-          isDisabled={isLoading || !(formData.email && formData.password && formData.password === formData.confirmPassword)}
+          isDisabled={
+            isLoading ||
+            !(
+              formData.email &&
+              formData.password &&
+              formData.password === formData.confirmPassword
+            )
+          }
           isLoading={isLoading}
           loadingText="Registering"
         >
-          {t('title')}
+          {t("title")}
         </Button>
       </Flex>
     </Box>
-  )
+  );
 }

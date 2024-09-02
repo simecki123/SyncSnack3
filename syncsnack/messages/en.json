@@ -50,5 +50,9 @@
       "Login": "Log in",
       "Forgotpassword": "Forgot password",
       "CreateAccount": "Create Account"
+    },
+
+    "Footer": {
+      "SignOutButton": "Sign out"
     }
 }

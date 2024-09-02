@@ -50,5 +50,9 @@
       "Login": "Ulogiraj se",
       "Forgotpassword": "Zaboravljena lozinka?",
       "CreateAccount": "Novi Račun"
+    },
+
+    "Footer": {
+      "SignOutButton": "Odjavi se"
     }
   }
