@@ -112,14 +112,18 @@ export default function RegisterComponent() {
   };
 
   return (
-    <Box className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <Box className="max-w-md mx-auto mt-10 p-6  rounded-lg shadow-md">
       <FormControl className="mb-4">
         <FormLabel>{t('email')}: </FormLabel>
         <Input
+          id="email"
           name="email"
+          type="email"
+          focusBorderColor="xblue.500"
+          className="mb-2"
           value={formData.email}
           onChange={handleInputChange}
-          type="email"
+          
         />
       </FormControl>
       <FormControl className="mb-4">
@@ -129,6 +133,7 @@ export default function RegisterComponent() {
           value={formData.password}
           onChange={handleInputChange}
           type="password"
+          focusBorderColor="xblue.500"
         />
       </FormControl>
       <FormControl className="mb-4">
@@ -138,6 +143,7 @@ export default function RegisterComponent() {
           value={formData.confirmPassword}
           onChange={handleInputChange}
           type="password"
+          focusBorderColor="xblue.500"
         />
       </FormControl>
       <Flex justifyContent="center" mt={6}>
