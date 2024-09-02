@@ -54,5 +54,11 @@
 
     "Footer": {
       "SignOutButton": "Sign out"
+    },
+
+    "GroupJoinCreateModal": {
+      "Header": "Group options",
+      "Tab1": "Join",
+      "Tab2": "Create"
     }
 }

@@ -54,5 +54,11 @@
 
     "Footer": {
       "SignOutButton": "Odjavi se"
+    },
+
+    "GroupJoinCreateModal": {
+      "Header": "Opcije",
+      "Tab1": "Učlani se",
+      "Tab2": "Kreiraj grupu"
     }
   }
