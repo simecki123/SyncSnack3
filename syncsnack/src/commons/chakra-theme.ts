@@ -14,10 +14,10 @@ export const theme = extendTheme({
       700: "#000000",
     },
     xorange: {
-      100: "#f2a470",
-      200: "#f2a470",
-      300: "#f2a470",
-      400: "#f2a470",
+      100: "#edb591",
+      200: "#edab80",
+      300: "#f0a87a",
+      400: "#d98068", // dark mode onClick color
       500: "#f2a470",
       600: "#d98068",
       700: "#8c3331",
@@ -34,6 +34,6 @@ export const theme = extendTheme({
   },
   fonts: {
     body: `'Titillium Web', sans-serif`,
-    heading: `'Lilita One', system-ui`
-  }
+    heading: `'Lilita One', system-ui`,
+  },
 });

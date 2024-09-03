@@ -25,6 +25,7 @@ const initialState: any = {
 export default function SidebarGroups({ accessToken }: any) {
   const [state, formAction] = useFormState(handleGroupCreate, initialState);
   const { groups, error } = useGroups(accessToken, state);
+  const [activeGroup, setActiveGroup] = useState(null);
 
   /**
    * This is used for group links drawer and modal
@@ -50,7 +51,10 @@ export default function SidebarGroups({ accessToken }: any) {
           objectFit="cover"
           src="/kkzadar.png"
           boxSize={14}
-          onClick={onDrawerOpen}
+          onClick={() => {
+            setActiveGroup(group);
+            onDrawerOpen();
+          }}
         />
       ))}
       <IconButton
@@ -61,7 +65,11 @@ export default function SidebarGroups({ accessToken }: any) {
         boxSize={14}
         onClick={onGroupModalOpen}
       />
-      <SidebarGroupDrawer isOpen={isDrawerOpen} onClose={onDrawerClose} />
+      <SidebarGroupDrawer
+        group={activeGroup}
+        isOpen={isDrawerOpen}
+        onClose={onDrawerClose}
+      />
       <JoinCreateGroupModal
         state={state}
         formAction={formAction}
