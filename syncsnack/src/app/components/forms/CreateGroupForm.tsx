@@ -11,13 +11,13 @@ const initialState: any = {
   errors: null,
 };
 
-export default function CreateGroupForm({ onClose }: any) {
-  const [state, formAction] = useFormState(handleGroupCreate, initialState);
+export default function CreateGroupForm({ onClose, state, formAction }: any) {
   const toast = useToast();
   const t = useTranslations("StepTwoGroupInformaiton");
 
   useEffect(() => {
     if (state && state.message === "Group created") {
+      state.message = "";
       onClose();
       toast({
         title: "Group created",

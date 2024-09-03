@@ -5,16 +5,26 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import JoinCreateGroupModal from "../modals/JoinCreateGroupModal";
 import { useEffect, useState } from "react";
 import { useGroups } from "@/commons/custom-hooks";
+import { useFormState } from "react-dom";
+import { handleGroupCreate } from "@/app/server-actions/create-group";
+
+const initialState: any = {
+  message: null,
+  errors: null,
+};
 
 /**
  * This is the sidebar where all the groups icon are shown.
  * When clicked it will open a drawer with group options.
  * Also link to profile options is here.
- * To fetch groups we use the custom hook useGroups
+ * To fetch groups we use the custom hook useGroups.
+ * The form state in declared here so the group data is fetched every time,
+ * state is passed deep down in to the CreateGroupForm.tsx
  * @since 9.3.2024. 9:00
  */
 export default function SidebarGroups({ accessToken }: any) {
-  const { groups, error } = useGroups(accessToken);
+  const [state, formAction] = useFormState(handleGroupCreate, initialState);
+  const { groups, error } = useGroups(accessToken, state);
 
   /**
    * This is used for group links drawer and modal
@@ -44,7 +54,7 @@ export default function SidebarGroups({ accessToken }: any) {
         />
       ))}
       <IconButton
-        aria-label="Search database"
+        aria-label="Add Group"
         icon={<PlusIcon />}
         colorScheme="xblue"
         isRound={true}
@@ -53,6 +63,8 @@ export default function SidebarGroups({ accessToken }: any) {
       />
       <SidebarGroupDrawer isOpen={isDrawerOpen} onClose={onDrawerClose} />
       <JoinCreateGroupModal
+        state={state}
+        formAction={formAction}
         isOpen={isGroupModalOpen}
         onClose={onGroupModalClose}
       />
