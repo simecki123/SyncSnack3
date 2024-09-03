@@ -7,6 +7,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import CustomPasswordInput from "../../change-password/CustomPasswordInput";
 
 export default function GroupInformation({ formData, handleInputChange }: any) {
   const t = useTranslations("StepTwoGroupInformaiton");
@@ -38,12 +39,13 @@ export default function GroupInformation({ formData, handleInputChange }: any) {
           </FormControl>
           <FormControl className="mb-4">
             <FormLabel>{t("GroupPassword")}</FormLabel>
-            <Input
-              name="groupPassword"
+            <CustomPasswordInput
+              name="groupPassword" 
+              id="groupPassword"
               value={formData.groupPassword}
               onChange={handleInputChange}
-              type="password"
-            />
+             />
+            
           </FormControl>
         </>
       )}
@@ -67,12 +69,13 @@ export default function GroupInformation({ formData, handleInputChange }: any) {
           </FormControl>
           <FormControl className="mb-4">
             <FormLabel>{t("GroupPassword")}</FormLabel>
-            <Input
-              name="groupPassword"
+            <CustomPasswordInput
+              name="groupPassword" 
+              id="groupPassword"
               value={formData.groupPassword}
               onChange={handleInputChange}
-              type="password"
-            />
+             />
+            
           </FormControl>
         </>
       )}

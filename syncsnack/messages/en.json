@@ -19,6 +19,7 @@
     "SetProfileComponentPage": {
       "BackButton": "Back",
       "SetupProfile": "Setup Profile",
+      "SubmitWithoutGroupButton": "Set profile without group",
       "Next": "Next",
       "stepOneTitle": "User",
       "stepTwoTitle": "Group"

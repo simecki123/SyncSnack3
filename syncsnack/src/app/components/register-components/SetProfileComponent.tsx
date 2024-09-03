@@ -43,7 +43,7 @@ export default function SetProfileComponent() {
         } else {
           setFormData({ ...formData, groupChoice: e });
         }
-      };
+    };
 
     // Toast message --> possible to define in separate file that will hold toast for all cases where its needed
     const showToast = (title: string, description: string, status: 'success' | 'error' | 'warning' | 'info') => {
@@ -61,31 +61,45 @@ export default function SetProfileComponent() {
      * Hndles submit of the button for setting the profile up
      */
     const handleSubmit = async () => {
-        try {
-          let groupId;
-          if (formData.groupChoice === 'create') {
-            groupId = await createGroup();
-          } else {
-            groupId = await joinGroup();
-          }
-    
-          if (!groupId) {
-            showToast('Error', 'Failed to create or join group', 'error');
-            return;
-          }
-    
-          const userId = searchParams.get('userId'); // Assuming userId is in the URL
-          await createUserProfile(userId, groupId);
-    
-          showToast('Success', 'Profile setup successful!', 'success');
-          setTimeout(() => {
-            router.push('/login');
-          }, 2000);
-        } catch (error: any) {
-          console.error('Profile setup error:', error);
-    
+      try {
+        const userId = searchParams.get('userId'); // Assuming userId is in the URL
+        await createUserProfile(userId);
+        
+        let groupId;
+        if (formData.groupChoice === 'create') {
+          groupId = await createGroup();
+        } else {
+          groupId = await joinGroup(userId);
         }
-      };
+
+        console.log("groupId ", groupId);
+  
+        if (!groupId) {
+          showToast('Error', 'Failed to create or join group', 'error');
+          return;
+        }
+  
+        
+  
+        showToast('Success', 'Profile setup successful!', 'success');
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000);
+      } catch (error: any) {
+        console.error('Profile setup error:', error);
+  
+      }
+    };
+
+    const handleSubmitWithoutGroup = async () => {
+      try {
+        const userId = searchParams.get('userId'); // Assuming userId is in the URL
+        await createUserProfile(userId);
+        router.push('/login');
+      } catch(error: any) {
+        console.error('Profile setup error:', error);
+      }
+    }
 
 
       /**
@@ -113,37 +127,50 @@ export default function SetProfileComponent() {
       /**
        * Separate function for user to join group
        */
-      const joinGroup = async (): Promise<string> => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/join`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.groupName,
-            password: formData.groupPassword,
-          }),
-        });
+      const joinGroup = async (userId: string | null): Promise<string> => {
+        try {
+            console.log("groupName: ", formData.groupName);
+            console.log("groupPassword: ", formData.groupPassword);
+            
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/join`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId: userId,
+                    name: formData.groupName,
+                    password: formData.groupPassword,
+                }),
+            });
     
-        if (response.status === 404) {
-          showToast('Error', 'Group not found', 'error');
-          throw new Error('Group not found'); // Ensure the error is thrown to halt further processing
+            console.log("response ", response);
+    
+            if (response.status === 400) {
+                // handle all errors when backend is done with return of specific errors
+                
+            }
+    
+            if (!response.ok) {
+                throw new Error('Failed to join group');
+            }
+    
+            const groupData = await response.json();
+            return groupData.groupId;
+    
+        } catch (error: any) {
+            console.error('Error joining group:', error.message);
+            showToast('Error', error.message || 'An unexpected error occurred', 'error');
+            throw error;
         }
+    };
     
-        if (!response.ok) {
-          throw new Error('Failed to join group');
-        }
-    
-        const groupData = await response.json();
-        return groupData.groupId;
-      };
 
       /**
        * Last step in our registration process. Creating user profile. If user didnt verify email backend will return forbidden. 
        */
-      const createUserProfile = async (userId: string | null, groupId: string) => {
+      const createUserProfile = async (userId: string | null) => {
         const userProfileData = new FormData();
         const jsonBlob = new Blob([JSON.stringify({
           userId,
-          groupId,
           firstName: formData.firstName,
           lastName: formData.lastName,
         })], { type: 'application/json' });
@@ -154,8 +181,14 @@ export default function SetProfileComponent() {
           method: 'POST',
           body: userProfileData,
         });
+
+        console.log("userCreation response ", response);
     
-        if (!response.ok) {
+        if (response.status === 409) {
+          showToast('Error', 'User profile already exists', 'error');
+        }
+
+        if(!response.ok && response.status !== 409){
           throw new Error('Failed to create user profile');
         }
       };
@@ -180,6 +213,8 @@ export default function SetProfileComponent() {
       };
     
       const CurrentStepComponent = steps[activeStep].component;
+
+  
 
   return (
     
@@ -206,6 +241,11 @@ export default function SetProfileComponent() {
             <Button onClick={handleBack} isDisabled={activeStep === 0}>
               {t("BackButton")}
             </Button>
+            {activeStep === 0 && (
+              <Button colorScheme='xorange' onClick={handleSubmitWithoutGroup}>
+                {t("SubmitWithoutGroupButton")}
+              </Button>
+            )}
             {activeStep === steps.length - 1 ? (
               <Button
                 colorScheme="xblue"
