@@ -1,64 +1,57 @@
 {
-    "HomePage": {
-      "title": "Nema ništa za vidjeti ovdje."
-    },
-
-    "RegisterPage": {
-      "title": "Registracija",
-      "email": "E-adresa",
-      "password": "Lozinka",
-      "confirmPassword": "Potvrdi lozinku"
-    },
-
-    "SetUpProfilePage": {
-      "title": "Registracija",
-      "loading": "Učitavanje..."
-      
-    },
-
-    "SetProfileComponentPage": {
-      "BackButton": "Nazad",
-      "SetupProfile": "Postavi profil",
-      "Next": "Dalje",
-      "stepOneTitle": "Profil",
-      "stepTwoTitle": "Grupa"
-    },
-
-    "StepOneUserProfile": {
-      "firstName": "Ime",
-      "lastName": "Prezime"
-    },
-
-    "StepTwoGroupInformaiton": {
-      "GroupChoice": "Izbor grupe",
-      "JoinGroup": "Pridruži se grupi",
-      "CreateGroup": "Stvori grupu",
-      "GroupName": "Ime grupe",
-      "GroupPassword": "Lozinka grupe",
-      "GroupDescription": "Opis grupe"
-
-    },
-
-    "ChangePasswordPage": {
-      "title": "Resetirajte lozinku",
-      "enterPassword": "Unesite novu lozinku ",
-      "confirmPassword": "Potvrdite novu lozinku",
-      "resetPasswdButton": "Resetirajte lozinku"
-    },
-
-    "LoginPage": {
-      "Login": "Ulogiraj se",
-      "Forgotpassword": "Zaboravljena lozinka?",
-      "CreateAccount": "Novi Račun"
-    },
-
-    "Footer": {
-      "SignOutButton": "Odjavi se"
-    },
-
-    "GroupJoinCreateModal": {
-      "Header": "Opcije",
-      "Tab1": "Učlani se",
-      "Tab2": "Kreiraj grupu"
-    }
+  "HomePage": {
+    "title": "Nema ništa za vidjeti ovdje."
+  },
+  "RegisterPage": {
+    "title": "Registracija",
+    "email": "E-adresa",
+    "password": "Lozinka",
+    "confirmPassword": "Potvrdi lozinku"
+  },
+  "SetUpProfilePage": {
+    "title": "Registracija",
+    "loading": "Učitavanje..."
+  },
+  "SetProfileComponentPage": {
+    "BackButton": "Nazad",
+    "SetupProfile": "Postavi profil",
+    "Next": "Dalje",
+    "stepOneTitle": "Profil",
+    "stepTwoTitle": "Grupa"
+  },
+  "StepOneUserProfile": {
+    "firstName": "Ime",
+    "lastName": "Prezime"
+  },
+  "StepTwoGroupInformaiton": {
+    "GroupChoice": "Izbor grupe",
+    "JoinGroup": "Pridruži se grupi",
+    "CreateGroup": "Stvori grupu",
+    "GroupName": "Ime grupe",
+    "GroupPassword": "Lozinka grupe",
+    "GroupDescription": "Opis grupe"
+  },
+  "ChangePasswordPage": {
+    "title": "Resetirajte lozinku",
+    "enterPassword": "Unesite novu lozinku ",
+    "confirmPassword": "Potvrdite novu lozinku",
+    "resetPasswdButton": "Resetirajte lozinku"
+  },
+  "LoginPage": {
+    "Login": "Ulogiraj se",
+    "Forgotpassword": "Zaboravljena lozinka?",
+    "CreateAccount": "Novi Račun"
+  },
+  "Footer": {
+    "SignOutButton": "Odjavi se"
+  },
+  "GroupJoinCreateModal": {
+    "Header": "Opcije",
+    "Tab1": "Učlani se",
+    "Tab2": "Kreiraj grupu"
+  },
+  "Group events page": {
+    "Create event": "Napravi Event",
+    "Make Order": "Naruči"
   }
+}
