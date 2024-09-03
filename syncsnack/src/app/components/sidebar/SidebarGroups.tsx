@@ -49,7 +49,8 @@ export default function SidebarGroups({ accessToken }: any) {
           key={index}
           className="rounded-full"
           objectFit="cover"
-          src="/kkzadar.png"
+          src={group.photoUrl}
+          fallbackSrc="/fallback-group.png"
           boxSize={14}
           onClick={() => {
             setActiveGroup(group);

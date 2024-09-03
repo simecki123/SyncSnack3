@@ -2,8 +2,8 @@
 import { Button, Input, Text } from "@chakra-ui/react";
 import PasswordInput from "./PasswordInput";
 import { useFormState } from "react-dom";
-import { handleLogin } from "@/app/server-actions/login";
 import { useTranslations } from "next-intl";
+import { handleLogin } from "@/app/server-actions/login";
 
 const initialState: any = {
   message: null,
