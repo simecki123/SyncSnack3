@@ -24,7 +24,7 @@ export default function SidebarGroupDrawer({ isOpen, onClose, group }: any) {
 
         <DrawerBody className="flex flex-col">
           <Link href={`group-events?${groupId}`}>Group events</Link>
-          <Link href={`orders?${groupId}`}>Orders</Link>
+          <Link href={`orders?groupId=${groupId}`}>Orders</Link>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
