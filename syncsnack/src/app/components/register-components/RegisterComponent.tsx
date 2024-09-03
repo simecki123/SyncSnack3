@@ -5,7 +5,7 @@ import { Box, useToast, Button, FormControl, FormLabel, Flex, Input } from '@cha
 import { useTranslations } from 'next-intl';
 import CustomPasswordInput from '../change-password/CustomPasswordInput';
 import { useFormState } from 'react-dom';
-import { handleRegisterUser } from '@/app/server-actions/registerUser';
+import { handleRegisterUser } from '@/app/server-actions/register-user';
 
 export default function RegisterComponent() {
   const t = useTranslations('RegisterPage');
