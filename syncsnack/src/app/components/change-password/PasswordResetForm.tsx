@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { useFormState } from 'react-dom';
-import { handleChangePassword } from '@/app/server-actions/changePassword';
+import { handleChangePassword } from '@/app/server-actions/change-password';
 import CustomPasswordInput from './CustomPasswordInput';
 
 const initialState: any = {
