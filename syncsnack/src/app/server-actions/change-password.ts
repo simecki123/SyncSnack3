@@ -20,27 +20,32 @@ export async function handleChangePassword(prevState: any, formData: FormData) {
     resetCode: z.string(),
   });
 
-  console.log("passw: ", formData.get("confirmPassword"))
+  
 
   /**
    * Validate fields will make sure all data that is needed for updating password is ready
    */
-  const validatedFields = schema.safeParse({
+  const validatedFields = {
     newPassword: formData.get("newPassword"),
     confirmPassword: formData.get("confirmPassword"),
     passwordResetTokenId: formData.get("passwordResetTokenId"),
     resetCode: formData.get("resetCode"),
-  });
-
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: "Invalid input",
-    };
   }
 
-  if (validatedFields.data.newPassword !== validatedFields.data.confirmPassword) {
+  console.log("passw: ", validatedFields.newPassword);
+  console.log("passw: ", validatedFields.confirmPassword);
+  console.log("passw: ", validatedFields.passwordResetTokenId);
+  console.log("passw: ", validatedFields.resetCode);
+
+  if(validatedFields.passwordResetTokenId === 'undefined' || validatedFields.confirmPassword === 'undefined') {
+    console.log("real")
+    return {
+      message: "Not valid tokens provided",
+    };
+  }
+  
+
+  if (validatedFields.newPassword !== validatedFields.confirmPassword) {
     return {
       message: "Passwords do not match",
     };
@@ -53,14 +58,18 @@ export async function handleChangePassword(prevState: any, formData: FormData) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        passwordResetTokenId: validatedFields.data.passwordResetTokenId,
-        resetCode: validatedFields.data.resetCode,
-        newPassword: validatedFields.data.newPassword,
+        passwordResetTokenId: validatedFields.passwordResetTokenId,
+        resetCode: validatedFields.resetCode,
+        newPassword: validatedFields.newPassword,
       }),
     });
 
     if (response.ok) {
+      return {
+        message: "Success, password changed"
+      }
       redirect('/login');
+      
     } else {
       return {
         message: "Failed to reset password",
