@@ -1,10 +1,12 @@
 'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState, useTransition } from 'react';
 import { debounce } from 'lodash';
 import { Box, Flex, Input, InputGroup, InputLeftElement, Select } from '@chakra-ui/react';
+import { useTranslations } from 'next-intl';
 
 export default function SearchInputFilter({ setInput, setStatusFilter }: any) {
+  const t = useTranslations("OrdersPage");
   const [inputValue, setInputValue] = useState('');
 
   const debouncedLog = useCallback(
@@ -42,7 +44,7 @@ export default function SearchInputFilter({ setInput, setStatusFilter }: any) {
           </InputLeftElement>
           <Input
             type="text"
-            placeholder="Search"
+            placeholder={t('Searchbartext')}
             value={inputValue}
             onChange={handleInputChange}
             borderRadius="md"
@@ -66,10 +68,10 @@ export default function SearchInputFilter({ setInput, setStatusFilter }: any) {
           fontWeight="semibold"
           className="w-full md:w-1/3"
         >
-          <option value="" >All</option>
-          <option value="COMPLETED" >Completed</option>
-          <option value="IN_PROGRESS" >In Progress</option>
-          <option value="CANCELLED" >Canceled</option>
+          <option value="" >{t('Select-option-all')}</option>
+          <option value="COMPLETED" >{t('Select-option-completed')}</option>
+          <option value="IN_PROGRESS" >{t('Select-option-in-progress')}</option>
+          <option value="CANCELLED" >{t('Select-option-cancelled')}</option>
         </Select>
       </Flex>
     </Box>

@@ -7,9 +7,13 @@ import StatusPretty from '../status-preatty/StatusPretty';
 import RatingPretty from '../rating-preatty/RatingPretty';
 import OrderRateModalComponent from '../order-modal-component/OrderRateModalComponent';
 import OrderDescriptionModalComponent from '../order-modal-component/OrderDescriptionModalComponent';
+import { formatDate } from '@/commons/formatDate';
+import { useTranslations } from 'next-intl';
 
 
 export default function OrderRow({ order, accessToken }: any) {
+
+  const t = useTranslations('OrdersPage')
   const [isRateModalOpened, setRateModalOpen] = useState(false);
   const [isDescriptionModalOpened, setDescriptionModalOpen] = useState(false);
 
@@ -59,16 +63,16 @@ export default function OrderRow({ order, accessToken }: any) {
               {orderRating !== 0 ? (
                 <RatingPretty desc={order.additionalOptions.description} rating={orderRating} />
               ) : (
-                <Button onClick={() => setRateModalOpen(true)}>Rate</Button>
+                <Button onClick={() => setRateModalOpen(true)}>{t('RateButton')}</Button>
               )}
             </Box>
           ) : order.status === "IN_PROGRESS" ? (
             <Box className='h-10 flex items-center'>
-              <Text className='text-orange-light-1'>Can&apos;t rate yet...</Text>
+              <Text className='text-orange-light-1'>{t('Cant-rate-yet')}</Text>
             </Box>
           ) : order.status === "CANCELLED" ? (
             <Box className='h-10 flex items-center'>
-              <Text className='text-orange-dark-2' >Can&apos;t rate</Text>
+              <Text className='text-orange-dark-2' >{t('Cant-rate')}</Text>
             </Box>
           ) : null}
         </Td>
@@ -104,23 +108,6 @@ function objectToString(obj: any): string {
     .join('\n');
 }
 
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
 
-  const diff = now.getTime() - date.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-
-  if (diff < oneDay) return "Today";
-  if (diff < 2 * oneDay) return "Yesterday";
-  if (diff < 7 * oneDay) return "A few days ago";
-  if (diff < 14 * oneDay) return "Last week";
-  if (diff < 30 * oneDay) return "Last month";
-  if (diff < 40 * oneDay) return "More then a month ago";
-  if (diff < 90 * oneDay) return "More then 2 months ago";
-  if (diff < 140 * oneDay) return "More then a 3 months ago";
-  if (diff < 365 * oneDay) return "More than a 6 months ago";
-  return "More than a year ago";
-}
 
 

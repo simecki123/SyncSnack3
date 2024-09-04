@@ -5,6 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { calculateOrderSizeBasedOnScreenHeight } from '@/commons/screen';
 import OrderRow from '../order-rows/OrderRow';
 import OrderRowMobile from '../order-rows/OrderRowMobile';
+import { useTranslations } from 'next-intl';
 
 export default function OrdersTable({
   orders,
@@ -17,6 +18,8 @@ export default function OrdersTable({
   currentPage: number;
   setCurrentPage: any;
 }) {
+
+  const t = useTranslations('OrdersPage');
 
   return (
     <>
@@ -51,11 +54,11 @@ export default function OrdersTable({
             <Table variant="simple" colorScheme="gray">
               <Thead>
                 <Tr>
-                  <Th>Type</Th>
-                  <Th>Created</Th>
-                  <Th>Status</Th>
-                  <Th>Description</Th>
-                  <Th>Rating</Th>
+                  <Th>{t('Type')}</Th>
+                  <Th>{t('Created')}</Th>
+                  <Th>{t('Status')}</Th>
+                  <Th>{t('Description')}</Th>
+                  <Th>{t('Rating')}</Th>
                 </Tr>
               </Thead>
               <Tbody>
