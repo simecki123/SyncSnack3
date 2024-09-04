@@ -59,6 +59,7 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
         <FormControl>
           <FormLabel>{t('enterPassword')}:</FormLabel>
           <CustomPasswordInput
+            placeholder={t('passwordPlaceholder')}
             name="confirmPassword" 
             id="confirmPassword" 
             value={newPassword}
@@ -69,6 +70,7 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
         <FormControl>
           <FormLabel>{t('confirmPassword')}:</FormLabel>
           <CustomPasswordInput
+            placeholder={t('passwordPlaceholder')}
             name="confirmPassword" 
             id="confirmPassword" 
             value={confirmPassword}

@@ -11,6 +11,7 @@ export default function UserProfile ({ formData, handleInputChange }: any)  {
       <FormLabel>{t('firstName')}:</FormLabel>
       <Input
         name="firstName"
+        placeholder={t('firstName')}
         value={formData.firstName}
         onChange={handleInputChange}
       />
@@ -19,6 +20,7 @@ export default function UserProfile ({ formData, handleInputChange }: any)  {
       <FormLabel>{t('lastName')}:</FormLabel>
       <Input
         name="lastName"
+        placeholder={t('lastName')}
         value={formData.lastName}
         onChange={handleInputChange}
       />

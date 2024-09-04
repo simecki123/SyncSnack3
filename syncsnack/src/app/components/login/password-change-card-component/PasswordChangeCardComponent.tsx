@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Box, VStack, Input, Button, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import Lottie from 'lottie-react';
 import coffeeLoadingAnimation from '@/../../public/coffeeLoading.json'; // Adjust the path as necessary
+import { useTranslations } from 'next-intl';
 
 export default function PasswordChangeCard({ onClose }: { onClose: () => void}) {
+  const t = useTranslations("ChangePasswordPage");
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
@@ -91,12 +93,12 @@ export default function PasswordChangeCard({ onClose }: { onClose: () => void}) 
     <Box bg="white" textColor="xblue.200" p={6} rounded="md" shadow="md">
       <VStack as="form" onSubmit={handleForgotYourPassword} spacing={4} align="stretch">
         <FormControl>
-          <FormLabel>Email</FormLabel>
+          <FormLabel>{t("email")}</FormLabel>
           <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder={t('enterEmail')}
             borderColor="xblue.300"
             _hover={{ borderColor: "xblue.400" }}
             _focus={{ borderColor: "xblue.500", boxShadow: "0 0 0 1px #15408c" }}
@@ -120,7 +122,7 @@ export default function PasswordChangeCard({ onClose }: { onClose: () => void}) 
               />
             </Box>
           ) : (
-            "Reset Password"
+            `${t('resetPasswdButton')}`
           )}
         </Button>
       </VStack>

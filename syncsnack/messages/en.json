@@ -2,7 +2,7 @@
     "HomePage": {
       "title": "Nothing to see here."
     },
-
+ 
     "RegisterPage": {
       "title": "Register",
       "email": "Email",
@@ -42,15 +42,19 @@
 
     "ChangePasswordPage": {
       "title": "Reset Your Password",
+      "passwordPlaceholder": "Password",
       "enterPassword": "Enter your new password",
       "confirmPassword": "Confirm your new password",
-      "resetPasswdButton": "Reset Password"
+      "resetPasswdButton": "Reset Password",
+      "enterEmail": "Enter your email",
+      "email": "Email"
     },
 
     "LoginPage": {
       "Login": "Log in",
       "Forgotpassword": "Forgot password",
       "CreateAccount": "Create Account"
+      
     },
 
     "Footer": {
