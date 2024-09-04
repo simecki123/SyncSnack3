@@ -6,7 +6,6 @@ import OrderTypePretty from "../order-type-preatty/OrderTypePretty";
 import StatusPretty from "../status-preatty/StatusPretty";
 import RatingPretty from "../rating-preatty/RatingPretty";
 import OrderRateModalComponent from "../order-modal-component/OrderRateModalComponent";
-import OrderDescriptionModalComponent from "../order-modal-component/OrderDescriptionModalComponent";
 
 export default function OrderRowMobile({ order, accessToken }: any) {
   const [isRateModalOpened, setRateModalOpen] = useState(false);
@@ -17,9 +16,7 @@ export default function OrderRowMobile({ order, accessToken }: any) {
     setRateModalOpen(false);
   };
 
-  const handleDescriptionCloseModal = () => {
-    setDescriptionModalOpen(false);
-  };
+  
 
   const bgGradient = useColorModeValue(
     "linear(to-r, white.200, white.400)",
@@ -102,24 +99,6 @@ export default function OrderRowMobile({ order, accessToken }: any) {
       
     </>
   );
-}
-
-function objectToString(obj: any): string {
-  if (typeof obj !== "object" || obj === null) {
-    return String(obj);
-  }
-
-  return Object.entries(obj)
-    .map(([key, value]) => {
-      if (typeof value === "object" && value !== null) {
-        return `${key}:\n${objectToString(value)
-          .split("\n")
-          .map((line) => `  ${line}`)
-          .join("\n")}`;
-      }
-      return `${key}: ${value}`;
-    })
-    .join("\n");
 }
 
 export function formatDate(dateString: string): string {
