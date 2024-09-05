@@ -1,5 +1,5 @@
 "use client";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 
 const DotLottieReact = dynamic(
@@ -8,10 +8,10 @@ const DotLottieReact = dynamic(
   { ssr: false },
 );
 
-// jfklajfkljda
 export default function Loading() {
   return (
     <Box className="h-screen w-full flex items-center justify-center text-white">
+      <Text>loading...</Text>
       <DotLottieReact
         src="/coffeeLoading.json"
         loop

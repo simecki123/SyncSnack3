@@ -1,8 +1,8 @@
 import CreateEventButtonModal from "@/app/components/group-events/CreateEventButtonModal";
 import GroupEventCard from "@/app/components/group-events/GroupEventCard";
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
-export default function GroupEventsPage() {
+export default async function GroupEventsPage({ searchParams }: any) {
   return (
     <Box className="m-2">
       <CreateEventButtonModal />
