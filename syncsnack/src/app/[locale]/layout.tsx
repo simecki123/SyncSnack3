@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import Providers from "../components/Providers";
 import { ColorModeScript } from "@chakra-ui/react";
 import Footer from "../components/footer/Footer";
+import ProfilePageButton from "../components/profile-page-components/ProfilePageButton";
 
 export const metadata: Metadata = {
   title: "Create Next App",
