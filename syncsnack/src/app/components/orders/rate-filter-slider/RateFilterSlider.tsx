@@ -1,10 +1,16 @@
-'use client'
-import { Box, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from "@chakra-ui/react"
-import { useTranslations } from "next-intl"
+"use client";
+import {
+  Box,
+  Slider,
+  SliderFilledTrack,
+  SliderMark,
+  SliderThumb,
+  SliderTrack,
+} from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 export default function RateFilterSlider({ setRateFilter }: any) {
-
-  const t = useTranslations('OrdersPage');
+  const t = useTranslations("OrdersPage");
 
   return (
     <Box className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto px-4 sm:px-6 md:px-8">
@@ -17,16 +23,11 @@ export default function RateFilterSlider({ setRateFilter }: any) {
         className="mt-8 mb-12"
       >
         {[0, 1, 2, 3, 4, 5].map((value) => (
-          <SliderMark
-            key={value}
-            value={value}
-            mt="4"
-            
-          >
-            {value === 0 ? `${t('Select-option-all')}` : "★"}
+          <SliderMark key={value} value={value} mt="4" className="-ml-2">
+            {value === 0 ? `${t("Select-option-all")}` : "★"}
           </SliderMark>
         ))}
-        <SliderTrack bg="xred.200" h="3px">
+        <SliderTrack bg="xred.200" h="3px" className="">
           <SliderFilledTrack bg="xred.500" />
         </SliderTrack>
         <SliderThumb
@@ -38,17 +39,5 @@ export default function RateFilterSlider({ setRateFilter }: any) {
         />
       </Slider>
     </Box>
-  )
-}
-
-const labelStyles = {
-  mt: '3',
-  ml: '-1',
-  fontSize: 'sm',
-}
-
-const styleForAll = {
-  mt: '3',
-  ml: '-2.5',
-  fontSize: 'sm',
+  );
 }

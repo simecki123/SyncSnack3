@@ -54,6 +54,12 @@
     "Tab1": "Join",
     "Tab2": "Create"
   },
+
+  "Group events page": {
+    "Create event": "Create event",
+    "Make Order": "Make Order"
+  },
+
   "OrdersPage": {
     "Searchbartext": "Search",
     "Select-option-all": "All",
@@ -79,3 +85,4 @@
     "Cant-rate": "Can't rate"
   }
 }
+

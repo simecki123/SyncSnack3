@@ -11,6 +11,7 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import CreateGroupForm from "../forms/CreateGroupForm";
+import { Suspense } from "react";
 
 export default function JoinCreateGroupModal({
   isOpen,

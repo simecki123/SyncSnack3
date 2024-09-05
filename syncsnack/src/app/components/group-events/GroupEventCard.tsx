@@ -1,6 +1,8 @@
 import { Box, Text, Progress, Button } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 export default function GroupEventCard() {
+  const t = useTranslations("Group events page");
   return (
     <Box className="border rounded-lg p-4 w-full mx-auto h-40 shadow-lg">
       <Box className="flex justify-between mb-4">
@@ -17,7 +19,7 @@ export default function GroupEventCard() {
       </Box>
 
       <Box className="flex justify-center mb-4">
-        <Button colorScheme="xorange">Make Order</Button>
+        <Button colorScheme="xorange">{t("Make Order")}</Button>
       </Box>
 
       <Progress

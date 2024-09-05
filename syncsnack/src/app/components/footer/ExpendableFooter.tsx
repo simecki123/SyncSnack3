@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import {
   Box,
@@ -35,7 +35,7 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
         setIsExpanded(false);
       }
     };
-    
+
     if (isExpanded) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
@@ -58,8 +58,6 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
           transform="translateX(-50%)"
           width="80%" // Smaller width for dropdown
           maxWidth="400px"
-          backgroundColor={theme.colors.xblue[500]}
-          color={theme.colors.xorange[100]}
           p={4}
           boxShadow="0 -2px 10px rgba(0, 0, 0, 0.3)"
           zIndex={1000}
@@ -68,9 +66,7 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
         >
           <Flex justify="space-between" align="center">
             <ScaleFade initialScale={0.9} in={isSignOutButtonVisible}>
-              {isSignOutButtonVisible && (
-                <SignOutButton />
-              )}
+              {isSignOutButtonVisible && <SignOutButton />}
             </ScaleFade>
             <FooterLanguageButtons />
             <SwitchColorThemeButton />
@@ -78,10 +74,8 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
               aria-label="Close settings"
               icon={<CloseIcon />}
               onClick={() => setIsExpanded(false)}
-              backgroundColor="transparent"
-              color="white"
+              colorScheme="xblue"
               _hover={{
-                backgroundColor: theme.colors.xblue[300],
                 transform: "rotate(90deg)", // Spins in place when hovered
               }}
               transition="all 0.3s ease"
@@ -98,10 +92,11 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
           aria-label="Open settings"
           icon={<SettingsIcon />}
           onClick={() => setIsExpanded(true)}
-          backgroundColor={theme.colors.xblue[400]}
-          
+          colorScheme="xblue"
           boxShadow="0 2px 8px rgba(0, 0, 0, 0.2)"
-          _hover={{ backgroundColor: theme.colors.xblue[500], transform: "rotate(90deg)" }} // Spins in place when hovered
+          _hover={{
+            transform: "rotate(90deg)",
+          }} // Spins in place when hovered
           transition="all 0.3s ease"
           zIndex={1000}
           size="md"

@@ -19,8 +19,6 @@ export default function LoginForm() {
   const t = useTranslations("LoginPage");
   const [state, formAction] = useFormState(handleLogin, initialState);
 
-  console.log(state);
-
   return (
     <form action={formAction}>
       <Input
