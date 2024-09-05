@@ -15,6 +15,7 @@
   "SetProfileComponentPage": {
     "BackButton": "Nazad",
     "SetupProfile": "Postavi profil",
+    "SubmitWithoutGroupButton": "Postavi profil bez grupe",
     "Next": "Dalje",
     "stepOneTitle": "Profil",
     "stepTwoTitle": "Grupa"
@@ -34,6 +35,7 @@
   "ChangePasswordPage": {
     "title": "Resetirajte lozinku",
     "enterPassword": "Unesite novu lozinku ",
+    "passwordPlaceholder": "Lozinka",
     "confirmPassword": "Potvrdite novu lozinku",
     "resetPasswdButton": "Resetirajte lozinku",
     "enterEmail": "Unesite E-adresu",
@@ -52,10 +54,11 @@
     "Tab1": "Učlani se",
     "Tab2": "Kreiraj grupu"
   },
+  
   "Group events page": {
     "Create event": "Napravi Event",
     "Make Order": "Naruči"
-  },
+
   "OrdersPage": {
     "Searchbartext": "Pretraživanje",
     "Select-option-all": "Sve",
@@ -80,4 +83,6 @@
     "Cant-rate-yet": "Can't rate yet",
     "Cant-rate": "Can't rate"
   }
+
 }
+
