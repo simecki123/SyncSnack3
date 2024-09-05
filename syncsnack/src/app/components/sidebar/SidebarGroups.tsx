@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useGroups } from "@/commons/custom-hooks";
 import { useFormState } from "react-dom";
 import { handleGroupCreate } from "@/app/server-actions/create-group";
+import { useSearchParams } from "next/navigation";
 
 const initialState: any = {
   message: null,
@@ -26,6 +27,8 @@ export default function SidebarGroups({ accessToken }: any) {
   const [state, formAction] = useFormState(handleGroupCreate, initialState);
   const { groups, error } = useGroups(accessToken, state);
   const [activeGroup, setActiveGroup] = useState(null);
+  const searchParams = useSearchParams();
+  const groupId = searchParams.get("groupId");
 
   /**
    * This is used for group links drawer and modal
@@ -47,7 +50,9 @@ export default function SidebarGroups({ accessToken }: any) {
       {groups.map((group: any, index: number) => (
         <Image
           key={index}
-          className="rounded-full"
+          borderRadius="full"
+          border={groupId === group.groupId ? "solid 4px" : ""}
+          borderColor={groupId === group.groupId ? "xorange.500" : ""}
           objectFit="cover"
           src={group.photoUrl}
           fallbackSrc="/fallback-group.png"

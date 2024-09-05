@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import CreateEventForm from "../forms/CreateEventForm";
-import { Suspense, useLayoutEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
@@ -26,8 +26,8 @@ export default function CreateEventButtonModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userHasEvent, setUserHasEvent] = useState(false);
   const { data: session, status }: any = useSession();
-  const groupId = useSearchParams().get("groupId");
-  useLayoutEffect(() => {
+  const groupId: any = useSearchParams().get("groupId");
+  useEffect(() => {
     if (status === "authenticated") {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/active`, {
         headers: {
@@ -37,14 +37,12 @@ export default function CreateEventButtonModal() {
         },
       })
         .then((res) => res.json())
-        .then((data: any) => {
-          if (data) {
-            setUserHasEvent(true);
-          }
+        .then(() => {
+          setUserHasEvent(true);
         })
-        .catch((e) => console.log("/api/events/active not good"));
+        .catch((e) => console.log("No current event"));
     }
-  }, [status, isOpen]);
+  }, [status, isOpen, groupId]);
 
   return (
     <Box className="flex justify-center">

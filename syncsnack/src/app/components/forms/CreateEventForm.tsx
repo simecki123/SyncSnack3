@@ -30,7 +30,7 @@ export default function CreateEventForm({ onCloseModal }: any) {
   const groupId: any = useSearchParams().get("groupId");
   const toast = useToast();
   const [state, formAction] = useFormState(handleCreateEvent, initialState);
-  handleEventCreated(state, toast, onCloseModal);
+  useEventCreated(state, toast, onCloseModal);
   const [eventType, setEventType] = useState("FOOD");
   const [timeInput, setTimeInput] = useState("10");
 
@@ -111,7 +111,7 @@ export default function CreateEventForm({ onCloseModal }: any) {
   );
 }
 
-function handleEventCreated(state: any, toast: any, onCloseModal: any) {
+function useEventCreated(state: any, toast: any, onCloseModal: any) {
   useLayoutEffect(() => {
     if (state.message === "Event Created") {
       onCloseModal();

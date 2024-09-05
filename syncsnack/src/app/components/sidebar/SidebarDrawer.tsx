@@ -8,6 +8,7 @@ import {
   DrawerCloseButton,
   Link,
 } from "@chakra-ui/react";
+import NavLinks from "./NavLinks";
 
 export default function SidebarGroupDrawer({ isOpen, onClose, group }: any) {
   if (!group) {
@@ -21,14 +22,8 @@ export default function SidebarGroupDrawer({ isOpen, onClose, group }: any) {
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>{name}</DrawerHeader>
-
         <DrawerBody className="flex flex-col">
-          <a href={`group-events?groupId=${groupId}`} onClick={onClose}>
-            Group events
-          </a>
-          <Link href={`orders?${groupId}`} onClick={onClose}>
-            Orders
-          </Link>
+          <NavLinks onClose={onClose} groupId={groupId} />
         </DrawerBody>
       </DrawerContent>
     </Drawer>
