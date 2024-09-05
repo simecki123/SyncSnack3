@@ -54,11 +54,10 @@
     "Tab1": "Učlani se",
     "Tab2": "Kreiraj grupu"
   },
-  
   "Group events page": {
     "Create event": "Napravi Event",
     "Make Order": "Naruči"
-
+  },
   "OrdersPage": {
     "Searchbartext": "Pretraživanje",
     "Select-option-all": "Sve",
@@ -82,7 +81,8 @@
     "More-than-a-year-ago": "Prije godinu dana",
     "Cant-rate-yet": "Can't rate yet",
     "Cant-rate": "Can't rate"
+  },
+  "ProfilePageButton": {
+    "Go-to-profile-button": "Posjeti profil"
   }
-
 }
-

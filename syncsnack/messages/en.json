@@ -54,12 +54,10 @@
     "Tab1": "Join",
     "Tab2": "Create"
   },
-
   "Group events page": {
     "Create event": "Create event",
     "Make Order": "Make Order"
   },
-
   "OrdersPage": {
     "Searchbartext": "Search",
     "Select-option-all": "All",
@@ -83,6 +81,8 @@
     "More-than-a-year-ago": "More than a year ago",
     "Cant-rate-yet": "Can't rate yet",
     "Cant-rate": "Can't rate"
+  },
+  "ProfilePageButton": {
+    "Go-to-profile-button": "Go to profile"
   }
 }
-

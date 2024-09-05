@@ -4,8 +4,6 @@ import {
   Box,
   IconButton,
   Flex,
-  useTheme,
-  Button,
   Collapse,
   ScaleFade,
 } from "@chakra-ui/react";
@@ -22,7 +20,6 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
   isSignOutButtonVisible,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const theme = useTheme();
   const footerRef = useRef<HTMLDivElement>(null);
 
   // Close the footer when clicking outside

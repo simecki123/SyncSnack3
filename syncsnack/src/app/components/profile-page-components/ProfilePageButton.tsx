@@ -2,9 +2,12 @@
 import { fetchImproved } from "@/app/server-actions/fetch-improved";
 import { auth } from "@/commons/auth";
 import { Avatar, Box, Button, Wrap, WrapItem, Text } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 export default function ProfilePageButton({ imageUrl }: { imageUrl: string }) {
+
+    const t = useTranslations('ProfilePageButton');
 	const [isHovered, setIsHovered] = useState(false);
 
 	function handleGoToProfilePage() {}
@@ -54,7 +57,7 @@ export default function ProfilePageButton({ imageUrl }: { imageUrl: string }) {
 						fontSize="sm"
 						transition="opacity 0.3s ease-in-out"
 					>
-						Go to Profile
+						{t('Go-to-profile-button')}
 					</Text>
 				)}
 			</Button>

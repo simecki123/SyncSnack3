@@ -15,7 +15,12 @@ export default function SignOutButton() {
   };
 
   return (
-    <Button colorScheme="xblue" onClick={handleSignOut}>
+    <Button
+      colorScheme="blue"
+      variant="solid"
+      _hover={{ bg: "red.500" }}
+      onClick={handleSignOut}
+    >
       {t("SignOutButton")}
     </Button>
   );

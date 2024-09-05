@@ -1,7 +1,3 @@
-import { Box } from "@chakra-ui/react";
-import SignOutButton from "./SignOutButton";
-import FooterLanguageButtons from "./FooterLanguageButtons";
-import SwitchColorThemeButton from "./SwitchColorThemeButton";
 import { auth } from "@/commons/auth";
 import ExpendableFooter from "./ExpendableFooter";
 
