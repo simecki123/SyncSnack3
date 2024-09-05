@@ -88,7 +88,7 @@ const ExpandableFooter: React.FC<ExpandableFooterProps> = ({
         <IconButton
           position="fixed"
           bottom={4}
-          left={4} // Positioned in the bottom-left corner
+          right={4} // Positioned in the bottom-left corner
           aria-label="Open settings"
           icon={<SettingsIcon />}
           onClick={() => setIsExpanded(true)}

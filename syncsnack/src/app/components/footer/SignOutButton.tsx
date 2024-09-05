@@ -7,7 +7,6 @@ export default function SignOutButton() {
   const t = useTranslations("Footer");
 
   const handleSignOut = async () => {
-    console.log("signing out");
     await signOut({
       redirect: true,
       callbackUrl: "/login",

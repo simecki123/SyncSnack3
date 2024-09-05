@@ -10,7 +10,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials) => {
-        console.log(`${process.env.BACKEND_URL}/api/auth/login`);
         const res = await fetch(`${process.env.BACKEND_URL}/api/auth/login`, {
           method: "POST",
           headers: {

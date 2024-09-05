@@ -1,11 +1,11 @@
-'use client'
-import { calculateOrderSizeBasedOnScreenHeight } from '@/commons/screen';
-import { Box } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import SearchInputFilter from './search-input-filter/SearchInputFilter';
-import RateFilterSlider from './rate-filter-slider/RateFilterSlider';
-import OrdersTable from './orders-table/OrdersTable';
-import { useRouter } from 'next/navigation';
+"use client";
+import { calculateOrderSizeBasedOnScreenHeight } from "@/commons/screen";
+import { Box } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import SearchInputFilter from "./search-input-filter/SearchInputFilter";
+import RateFilterSlider from "./rate-filter-slider/RateFilterSlider";
+import OrdersTable from "./orders-table/OrdersTable";
+import { useRouter } from "next/navigation";
 
 export default function OrdersPageTable({
   accessToken,
@@ -27,10 +27,9 @@ export default function OrdersPageTable({
 
   useEffect(() => {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/all?size=${calculateOrderSizeBasedOnScreenHeight()}&page=${currentPage}&search=${input}&rating=${rateFilter}&status=${statusFilter}`;
-    console.log("fetching data....")
     fetch(url, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
         groupId: `${groupId}`,
       },
@@ -38,9 +37,6 @@ export default function OrdersPageTable({
       .then((response) => response.json())
       .then((data) => setOrders(data))
       .catch(() => setOrders([]));
-
-
-      console.log("Fetch orders: ", orders)
   }, [currentPage, input, rateFilter, statusFilter, groupId, accessToken]);
 
   const updateUrlParams = (key: string, value: string | number) => {
@@ -50,20 +46,20 @@ export default function OrdersPageTable({
   };
 
   return (
-    <Box className='grow flex flex-col'>
-      <Box className='flex flex-col items-center'>
+    <Box className="grow flex flex-col">
+      <Box className="flex flex-col items-center">
         <SearchInputFilter
-          setInput={(value: string) => updateUrlParams('search', value)}
-          setStatusFilter={(value: string) => updateUrlParams('status', value)}
+          setInput={(value: string) => updateUrlParams("search", value)}
+          setStatusFilter={(value: string) => updateUrlParams("status", value)}
         />
         <RateFilterSlider
-          setRateFilter={(value: number) => updateUrlParams('rating', value)}
+          setRateFilter={(value: number) => updateUrlParams("rating", value)}
         />
       </Box>
       <OrdersTable
         accessToken={accessToken}
         orders={orders}
-        setCurrentPage={(page: number) => updateUrlParams('page', page)}
+        setCurrentPage={(page: number) => updateUrlParams("page", page)}
         currentPage={currentPage}
       />
     </Box>

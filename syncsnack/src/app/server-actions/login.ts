@@ -28,7 +28,7 @@ export async function handleLogin(prevState: any, formData: FormData) {
     }
     return { message: e.message[0] };
   }
-  redirect("/group-events");
+  redirect("/profile");
 }
 
 function validateUserInput(formData: FormData) {
@@ -66,7 +66,6 @@ async function checkDoesUserHaveProfile(validatedFields: any) {
   const userIdJson = await getUserIdResponse.json();
   const userId: any = userIdJson.userId;
 
-  console.log(`${process.env.BACKEND_URL}/api/users/profile?userId=${userId}`);
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/users/profile?userId=${userId}`,
     {

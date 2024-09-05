@@ -7,71 +7,63 @@
  * @returns
  */
 export async function handleRegisterUser(prevState: any, formData: FormData) {
-	// Retrieve values from FormData
-	const email = formData.get("email") as string | null;
-	const password = formData.get("password") as string | null;
-	const confirmPassword = formData.get("confirmPassword") as string | null;
+  // Retrieve values from FormData
+  const email = formData.get("email") as string | null;
+  const password = formData.get("password") as string | null;
+  const confirmPassword = formData.get("confirmPassword") as string | null;
 
-	// Log values for debugging
-	console.log(email, " email");
-	console.log(password, " password");
-	console.log(confirmPassword, " confirmPassword");
+  const errors: { [key: string]: string } = {};
 
-	// Validate values manually
-	const errors: { [key: string]: string } = {};
-	console.log(errors);
+  if (!email || !email.includes("@")) {
+    errors.email = "Invalid email address";
+  }
 
-	if (!email || !email.includes("@")) {
-		errors.email = "Invalid email address";
-	}
+  if (!password || password.length < 3) {
+    errors.password = "Password must be at least 6 characters long";
+  }
 
-	if (!password || password.length < 3) {
-		errors.password = "Password must be at least 6 characters long";
-	}
+  if (password !== confirmPassword) {
+    errors.confirmPassword = "Passwords do not match";
+  }
 
-	if (password !== confirmPassword) {
-		errors.confirmPassword = "Passwords do not match";
-	}
+  // If there are any validation errors, return them
+  if (Object.keys(errors).length > 0) {
+    return {
+      errors,
+      message: "Invalid input",
+    };
+  }
 
-	console.log(errors);
-	// If there are any validation errors, return them
-	if (Object.keys(errors).length > 0) {
-		return {
-			errors,
-			message: "Invalid input",
-		};
-	}
+  // Try to register the user
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/auth/register`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      },
+    );
 
-	// Try to register the user
-	try {
-		const response = await fetch(
-			`${process.env.BACKEND_URL}/api/auth/register`,
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					email,
-					password,
-				}),
-			}
-		);
-
-		if (response.status === 400) {
-			return {
-				message: "Email already in use",
-			};
-		}
-
-		if (!response.ok) {
-			throw new Error("Failed to register user");
-		}
-
-		return {
-      message: "Succesfully registered, please check your email"
+    if (response.status === 400) {
+      return {
+        message: "Email already in use",
+      };
     }
-	} catch (e: any) {
-		return {
-			message: "Error occurred during registration",
-		};
-	}
+
+    if (!response.ok) {
+      throw new Error("Failed to register user");
+    }
+
+    return {
+      message: "Succesfully registered, please check your email",
+    };
+  } catch (e: any) {
+    return {
+      message: "Error occurred during registration",
+    };
+  }
 }

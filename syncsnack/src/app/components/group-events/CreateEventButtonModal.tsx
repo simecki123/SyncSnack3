@@ -40,7 +40,7 @@ export default function CreateEventButtonModal() {
         .then(() => {
           setUserHasEvent(true);
         })
-        .catch((e) => console.log("No current event"));
+        .catch((e) => console.info("No current event"));
     }
   }, [status, isOpen, groupId]);
 

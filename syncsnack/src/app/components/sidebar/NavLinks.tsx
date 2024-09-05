@@ -60,7 +60,7 @@ function useLinks(groupId: any) {
             ]);
           }
         })
-        .catch((e) => console.log("no current event link"));
+        .catch((e) => console.info("no current event link"));
     }
   }, []);
   return links;

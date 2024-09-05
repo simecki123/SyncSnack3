@@ -17,12 +17,15 @@ export default function middleware(request: NextRequest) {
   return intlMiddleware(request);
 }
 
+/**
+ * Here we add all the routes in the application
+ */
 export const config = {
-  // Match root, login, and internationalized pathnames
   matcher: [
     "/",
     "/login",
     "/register",
+    "/profile",
     "/setprofile",
     "/group-events",
     "/orders",

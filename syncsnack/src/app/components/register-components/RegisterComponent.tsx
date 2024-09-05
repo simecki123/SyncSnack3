@@ -1,17 +1,24 @@
-
-'use client';
-import React, { useState, useEffect } from 'react';
-import { Box, useToast, Button, FormControl, FormLabel, Flex, Input } from '@chakra-ui/react';
-import { useTranslations } from 'next-intl';
-import CustomPasswordInput from '../change-password/CustomPasswordInput';
-import { useFormState } from 'react-dom';
-import { handleRegisterUser } from '@/app/server-actions/register-user';
+"use client";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  useToast,
+  Button,
+  FormControl,
+  FormLabel,
+  Flex,
+  Input,
+} from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
+import CustomPasswordInput from "../change-password/CustomPasswordInput";
+import { useFormState } from "react-dom";
+import { handleRegisterUser } from "@/app/server-actions/register-user";
 
 export default function RegisterComponent() {
-  const t = useTranslations('RegisterPage');
+  const t = useTranslations("RegisterPage");
 
   const toast = useToast();
-  
+
   const initialState: any = {
     message: null,
     errors: null,
@@ -32,35 +39,31 @@ export default function RegisterComponent() {
     setFormData({ ...formData, [name]: value });
   };
 
-
   // Validate form
   useEffect(() => {
     const { email, password, confirmPassword } = formData;
-    const isFormValid = email && password && confirmPassword && password === confirmPassword;
+    const isFormValid =
+      email && password && confirmPassword && password === confirmPassword;
     setIsButtonDisabled(!isFormValid);
   }, [formData]);
 
   // Show toast based on state
   useEffect(() => {
-    if(state.message) {
-      if(state.message === "Succesfully registered, please check your email"){
-        console.log(state)
+    if (state.message) {
+      if (state.message === "Succesfully registered, please check your email") {
         toast({
           title: state.message,
-          status: 'success',
+          status: "success",
           duration: 5000,
           isClosable: true,
         });
-
-      }else{
-        console.log(state)
+      } else {
         toast({
           title: state.message,
-          status: 'error',
+          status: "error",
           duration: 5000,
           isClosable: true,
         });
-        
       }
     }
   }, [state, toast]);
@@ -69,7 +72,7 @@ export default function RegisterComponent() {
     <Box className="max-w-md mx-auto mt-10 p-6 rounded-lg shadow-md">
       <form action={formAction}>
         <FormControl className="mb-4">
-          <FormLabel>{t('email')}: </FormLabel>
+          <FormLabel>{t("email")}: </FormLabel>
           <Input
             id="email"
             name="email"
@@ -83,7 +86,7 @@ export default function RegisterComponent() {
         </FormControl>
 
         <FormControl className="mb-4">
-          <FormLabel>{t('password')}: </FormLabel>
+          <FormLabel>{t("password")}: </FormLabel>
           <CustomPasswordInput
             name="password"
             id="password"
@@ -93,7 +96,7 @@ export default function RegisterComponent() {
         </FormControl>
 
         <FormControl className="mb-4">
-          <FormLabel>{t('confirmPassword')}: </FormLabel>
+          <FormLabel>{t("confirmPassword")}: </FormLabel>
           <CustomPasswordInput
             name="confirmPassword"
             id="confirmPassword"
@@ -110,11 +113,10 @@ export default function RegisterComponent() {
             isLoading={state.isLoading}
             loadingText="Registering"
           >
-            {t('title')}
+            {t("title")}
           </Button>
         </Flex>
       </form>
-
     </Box>
   );
 }

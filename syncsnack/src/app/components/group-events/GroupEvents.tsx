@@ -25,12 +25,11 @@ export default function GroupEvents() {
       })
         .then((res) => res.json())
         .then((data: any) => {
-          console.log(data);
           if (data) {
             setGroupEvents(data);
           }
         })
-        .catch((e) => console.log(e.message));
+        .catch((e) => console.info(e.message));
     }
   }, [groupId, status]);
 

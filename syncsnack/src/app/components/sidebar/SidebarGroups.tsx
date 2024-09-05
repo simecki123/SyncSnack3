@@ -1,5 +1,11 @@
 "use client";
-import { Box, IconButton, Image, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  IconButton,
+  Image,
+  useDisclosure,
+} from "@chakra-ui/react";
 import SidebarGroupDrawer from "./SidebarDrawer";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import JoinCreateGroupModal from "../modals/JoinCreateGroupModal";
@@ -8,6 +14,7 @@ import { useGroups } from "@/commons/custom-hooks";
 import { useFormState } from "react-dom";
 import { handleGroupCreate } from "@/app/server-actions/create-group";
 import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const initialState: any = {
   message: null,
@@ -29,6 +36,7 @@ export default function SidebarGroups({ accessToken }: any) {
   const [activeGroup, setActiveGroup] = useState(null);
   const searchParams = useSearchParams();
   const groupId = searchParams.get("groupId");
+  const { data: session, status }: any = useSession();
 
   /**
    * This is used for group links drawer and modal
@@ -46,7 +54,7 @@ export default function SidebarGroups({ accessToken }: any) {
   } = useDisclosure();
 
   return (
-    <Box className="flex flex-col space-y-2 p-2">
+    <Box className="flex flex-col space-y-2 p-2 h-full">
       {groups.map((group: any, index: number) => (
         <Image
           key={index}
@@ -82,6 +90,16 @@ export default function SidebarGroups({ accessToken }: any) {
         isOpen={isGroupModalOpen}
         onClose={onGroupModalClose}
       />
+      <Box className="grow flex items-end">
+        {status === "authenticated" && (
+          <Image
+            src={session.user.profileUri}
+            fallbackSrc="/template-user.png"
+            boxSize={14}
+            borderRadius="full"
+          />
+        )}
+      </Box>
     </Box>
   );
 }
