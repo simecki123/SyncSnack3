@@ -14,7 +14,7 @@ interface CustomPasswordInputProps {
 export default function CustomPasswordInput({
   name,
   id,
-  placeholder = "Password",
+  placeholder,
   value,
   onChange,
 }: CustomPasswordInputProps) {

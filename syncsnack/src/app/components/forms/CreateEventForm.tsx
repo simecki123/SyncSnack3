@@ -102,7 +102,9 @@ export default function CreateEventForm({ onCloseModal }: any) {
         placeholder="Description"
         className="mb-4"
       />
-      {state && <p className="text-red-500">{state.message}</p>}
+      {state && state.message !== "Event Created" && (
+        <p className="text-red-500">{state.message}</p>
+      )}
       <input type="hidden" name="groupId" value={groupId} />
       <SubmitButton />
     </form>
@@ -117,7 +119,7 @@ function handleEventCreated(state: any, toast: any, onCloseModal: any) {
         title: "Event Created",
         description: "",
         status: "success",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "top",
         colorScheme: "xblue",

@@ -20,6 +20,7 @@ export default function FooterLanguageButtons() {
   return (
     <>
       <Button
+        colorScheme="xblue"
         onClick={() => {
           if (appendUrl) {
             router.push(`/hr${pathname}`);
@@ -28,9 +29,10 @@ export default function FooterLanguageButtons() {
           }
         }}
       >
-        hr
+        🇭🇷
       </Button>
       <Button
+        colorScheme="xblue"
         onClick={() => {
           if (appendUrl) {
             router.push(`/en${pathname}`);
@@ -39,7 +41,7 @@ export default function FooterLanguageButtons() {
           }
         }}
       >
-        en
+        &#127466;&#127475;&#127468;
       </Button>
     </>
   );

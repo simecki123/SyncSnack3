@@ -34,9 +34,12 @@
   },
   "ChangePasswordPage": {
     "title": "Reset Your Password",
+    "passwordPlaceholder": "Password",
     "enterPassword": "Enter your new password",
     "confirmPassword": "Confirm your new password",
-    "resetPasswdButton": "Reset Password"
+    "resetPasswdButton": "Reset Password",
+    "enterEmail": "Enter your email",
+    "email": "Email"
   },
   "LoginPage": {
     "Login": "Log in",
@@ -54,5 +57,29 @@
   "Group events page": {
     "Create event": "Create event",
     "Make Order": "Make Order"
+  },
+  "OrdersPage": {
+    "Searchbartext": "Search",
+    "Select-option-all": "All",
+    "Select-option-completed": "Completed",
+    "Select-option-in-progress": "In progress",
+    "Select-option-cancelled": "Cancelled",
+    "Type": "Type",
+    "Created": "Created",
+    "Status": "Status",
+    "Description": "Description",
+    "Rating": "Rating",
+    "RateButton": "Rate",
+    "Today": "Today",
+    "Yesterday": "Yesterday",
+    "A-few-days-ago": "A few days ago",
+    "Last-week": "Last week",
+    "Last-month": "Last month",
+    "More-than-a-month-ago": "More than a month ago",
+    "More-than-3-months-ago": "More than 3 months ago",
+    "More-than-6-months-ago": "More than 6 months ago",
+    "More-than-a-year-ago": "More than a year ago",
+    "Cant-rate-yet": "Can't rate yet",
+    "Cant-rate": "Can't rate"
   }
 }

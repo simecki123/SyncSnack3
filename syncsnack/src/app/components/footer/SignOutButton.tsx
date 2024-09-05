@@ -14,5 +14,9 @@ export default function SignOutButton() {
     });
   };
 
-  return <Button onClick={handleSignOut}>{t("SignOutButton")}</Button>;
+  return (
+    <Button colorScheme="xblue" onClick={handleSignOut}>
+      {t("SignOutButton")}
+    </Button>
+  );
 }

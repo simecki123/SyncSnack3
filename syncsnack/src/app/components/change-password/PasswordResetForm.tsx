@@ -1,9 +1,8 @@
 "use client";
-import { Box, Button, FormControl, FormLabel, Input, Text, VStack, useToast } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, useToast } from '@chakra-ui/react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import { handleChangePassword } from '@/app/server-actions/change-password';
 import CustomPasswordInput from './CustomPasswordInput';
 
@@ -14,15 +13,13 @@ const initialState: any = {
 
 export default function PasswordResetForm({ searchParams }: { searchParams: any }) {
   const t = useTranslations('ChangePasswordPage');
-  
-  const [state, formAction] = useFormState(handleChangePassword, initialState);
+  const toast = useToast();
+  const router = useRouter();
 
-  // State to manage input values and button enabled state
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  // Effect to check if the button should be enabled
   useEffect(() => {
     if (newPassword && confirmPassword && newPassword === confirmPassword) {
       setIsButtonDisabled(false);
@@ -31,51 +28,64 @@ export default function PasswordResetForm({ searchParams }: { searchParams: any 
     }
   }, [newPassword, confirmPassword]);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('newPassword', newPassword);
+    formData.append('confirmPassword', confirmPassword);
+    formData.append('passwordResetTokenId', searchParams.passwordResetTokenId);
+    formData.append('resetCode', searchParams.resetCode);
+
+    const response = await handleChangePassword(initialState, formData);
+
+    if (response.message) {
+      toast({
+        title: response.message,
+        status: response.message.includes("Success") ? "success" : "error",
+        duration: 5000,
+        isClosable: true,
+      });
+
+      if (response.message.includes("Success")) {
+        router.push('/login');
+      }
+    }
+  };
+
   return (
-    <form action={formAction}>
+    <Box as="form" onSubmit={handleSubmit}>
       <VStack spacing={4}>
-        <Box width="100%">
-          <FormControl className="mb-4">
-            <FormLabel>
-              {t('enterPassword')}:
-            </FormLabel>
-            <CustomPasswordInput 
-              name="newPassword" 
-              id="newPassword" 
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </FormControl>
-        </Box>
+        <FormControl>
+          <FormLabel>{t('enterPassword')}:</FormLabel>
+          <CustomPasswordInput
+            placeholder={t('passwordPlaceholder')}
+            name="confirmPassword" 
+            id="confirmPassword" 
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+        </FormControl>
 
-        <Box width="100%">
-          <FormControl className="mb-4">
-            <FormLabel>
-              {t('confirmPassword')}:
-            </FormLabel>
-            <CustomPasswordInput 
-              name="confirmPassword" 
-              id="confirmPassword" 
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </FormControl>
-        </Box>
-
-        {state && <Text textColor={"red.500"}>{state.message}</Text>}
+        <FormControl>
+          <FormLabel>{t('confirmPassword')}:</FormLabel>
+          <CustomPasswordInput
+            placeholder={t('passwordPlaceholder')}
+            name="confirmPassword" 
+            id="confirmPassword" 
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </FormControl>
 
         <Button
           type="submit"
-          colorScheme="xblue"
-          width="100%"
-          mt={4}
-          isDisabled={isButtonDisabled} // Button is disabled if passwords don't match
+          colorScheme="blue"
+          isDisabled={isButtonDisabled}
         >
           {t('resetPasswdButton')}
         </Button>
       </VStack>
-      <Input type="hidden" name="passwordResetTokenId" value={searchParams.passwordResetTokenId} />
-      <Input type="hidden" name="resetCode" value={searchParams.resetCode} />
-    </form>
+    </Box>
   );
 }

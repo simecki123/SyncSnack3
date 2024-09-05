@@ -3,6 +3,7 @@ import SignOutButton from "./SignOutButton";
 import FooterLanguageButtons from "./FooterLanguageButtons";
 import SwitchColorThemeButton from "./SwitchColorThemeButton";
 import { auth } from "@/commons/auth";
+import ExpendableFooter from "./ExpendableFooter";
 
 export default async function Footer() {
   let isSignOutButtonVisible = false;
@@ -13,12 +14,6 @@ export default async function Footer() {
   }
 
   return (
-    <Box className="absolute bottom-0 left-0 w-full">
-      <Box className="flex p-2 justify-end space-x-2">
-        {isSignOutButtonVisible && <SignOutButton />}
-        <FooterLanguageButtons />
-        <SwitchColorThemeButton />
-      </Box>
-    </Box>
+    <ExpendableFooter isSignOutButtonVisible={isSignOutButtonVisible}></ExpendableFooter>
   );
 }

@@ -7,6 +7,7 @@ export default function SwitchColorThemeButton() {
   return (
     <IconButton
       aria-label="Search database"
+      colorScheme="xblue"
       onClick={toggleColorMode}
       icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
     />
