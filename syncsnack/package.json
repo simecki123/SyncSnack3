@@ -17,6 +17,7 @@
     "@fontsource/titillium-web": "^5.0.21",
     "@heroicons/react": "^2.1.5",
     "@lottiefiles/dotlottie-react": "^0.8.10",
+    "@stomp/stompjs": "^7.0.0",
     "clsx": "^2.1.1",
     "force": "^0.0.3",
     "framer-motion": "^11.3.31",

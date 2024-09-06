@@ -1,3 +1,4 @@
+import NotificationBell from "@/app/components/layout/NotificationBell";
 import SidebarGroups from "@/app/components/sidebar/SidebarGroups";
 import { auth } from "@/commons/auth";
 import { Box, Image, Text } from "@chakra-ui/react";
@@ -20,6 +21,7 @@ export default async function Layout({
       <Box>
         <SidebarGroups accessToken={activeUser.accessToken} />
       </Box>
+      <NotificationBell />
       <Box className="grow">{children}</Box>
     </Box>
   );

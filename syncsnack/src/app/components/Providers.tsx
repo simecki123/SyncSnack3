@@ -2,8 +2,9 @@
 import { theme } from "@/commons/chakra-theme";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
+import { GroupContextProvider } from "./context/GroupContext";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
       <ColorModeScript initialColorMode={"light"} />

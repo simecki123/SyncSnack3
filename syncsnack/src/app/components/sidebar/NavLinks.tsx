@@ -6,6 +6,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
+import { GroupContext } from "../context/GroupContext";
 
 export default function NavLinks({ groupId, onClose }: any) {
   const links = useLinks(groupId);
@@ -17,7 +18,11 @@ export default function NavLinks({ groupId, onClose }: any) {
           className="flex space-x-1 items-center border-2 border-black rounded-xl p-2 hover:bg-gray-400"
           key={index}
           href={link.goto}
-          onClick={onClose}
+          onClick={() => {
+            console.log("Setting group context id");
+            localStorage.setItem("GroupId", groupId);
+            onClose();
+          }}
         >
           <link.icon className="h-5 w-5" />
           <Text className="text-2xl">{link.name}</Text>
