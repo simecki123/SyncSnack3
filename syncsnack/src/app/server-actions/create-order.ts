@@ -3,19 +3,12 @@
 import { auth } from "@/commons/auth";
 import { z } from "zod";
 
-/**
- * This function handles user input validation on event creation and
- * sends a request to try creating the event for the user.
- *
- * @author Andrija Skontra
- */
 export async function handleCreateOrder(prevState: any, formData: FormData) {
-  // console log form data names: milk, sugar, type, desc
-  //
   console.log(formData.get("milk"));
   console.log(formData.get("sugar"));
   console.log(formData.get("type"));
   console.log(formData.get("desc"));
+  console.log(formData.get("eventType"));
 }
 
 async function sendCreateEventRequest(
