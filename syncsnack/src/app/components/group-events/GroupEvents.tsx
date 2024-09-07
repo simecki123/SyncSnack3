@@ -36,8 +36,8 @@ export default function GroupEvents() {
   return (
     <Box className="mt-4 grid grid-cols-1 md:grid-cols-3 md:m-20 gap-4">
       {groupEvents.length > 0 ? (
-        groupEvents.map((group, indx) => {
-          return <GroupEventCard key={indx} />;
+        groupEvents.map((groupEvent, indx) => {
+          return <GroupEventCard groupEvent={groupEvent} key={indx} />;
         })
       ) : (
         <p>No events in this group...</p>

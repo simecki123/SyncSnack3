@@ -1,33 +1,74 @@
-import { Box, Text, Progress, Button } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { GroupEvent } from "@/commons/types";
+import { Box, Text, Progress, Button, useDisclosure } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import CreateOrderModal from "../modals/CreateOrderModal";
 
-export default function GroupEventCard() {
+export default function GroupEventCard({
+  groupEvent,
+}: {
+  groupEvent: GroupEvent;
+}) {
   const t = useTranslations("Group events page");
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
+  const [progressValue, setProgressValue] = useState(0);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    const updateRemainingTime = () => {
+      const now = new Date();
+      const pendingUntil = new Date(groupEvent.pendingUntil);
+      const totalDuration = pendingUntil.getTime() - now.getTime();
+      const remaining = Math.max(0, totalDuration);
+      const seconds = Math.floor(remaining / 1000);
+
+      setRemainingSeconds(seconds);
+
+      // Calculate progress value (percentage of time elapsed)
+      const elapsedTime =
+        now.getTime() - new Date(groupEvent.createdAt).getTime();
+      const totalTime =
+        pendingUntil.getTime() - new Date(groupEvent.createdAt).getTime();
+      const progress = (elapsedTime / totalTime) * 100;
+      setProgressValue(Math.min(100, Math.max(0, progress)));
+    };
+
+    updateRemainingTime();
+    const intervalId = setInterval(updateRemainingTime, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [groupEvent.pendingUntil, groupEvent.createdAt]);
+
   return (
-    <Box className="border rounded-lg p-4 w-full mx-auto h-40 shadow-lg">
+    <Box className="border rounded-lg p-4 w-full mx-auto h-44 shadow-lg">
       <Box className="flex justify-between mb-4">
         <Box>
           <Text fontWeight="bold" fontSize="lg">
-            Name
+            {groupEvent.title}
           </Text>
-          <Text fontSize="sm">Description here</Text>
+          <Text fontSize="sm">{groupEvent.description}</Text>
         </Box>
         <Box>
-          <Text fontSize="sm">Firstname</Text>
-          <Text fontSize="sm">Lastname</Text>
+          <Text fontSize="sm">{groupEvent.userProfileFirstName}</Text>
+          <Text fontSize="sm">{groupEvent.userProfileLastName}</Text>
         </Box>
       </Box>
-
       <Box className="flex justify-center mb-4">
-        <Button colorScheme="xorange">{t("Make Order")}</Button>
+        <Button colorScheme="xorange" onClick={onOpen}>
+          {t("Make Order")}
+        </Button>
       </Box>
-
       <Progress
         className="rounded-full"
         size="sm"
         colorScheme="xorange"
-        value={50}
+        value={progressValue}
       />
+      <Text className="text-sm mt-2 text-center">
+        {Math.floor(remainingSeconds / 3600)}h{" "}
+        {Math.floor((remainingSeconds % 3600) / 60)}m {remainingSeconds % 60}s
+      </Text>
+      <CreateOrderModal onClose={onClose} isOpen={isOpen} />
     </Box>
   );
 }
