@@ -53,11 +53,7 @@ export default function GroupEventCard({
       <Text className="text-sm mt-2 text-center">
         {Math.floor(remainingSeconds / 60)}m {remainingSeconds % 60}s
       </Text>
-      <CreateOrderModal
-        onClose={onClose}
-        isOpen={isOpen}
-        eventType={groupEvent.eventType}
-      />
+      <CreateOrderModal onClose={onClose} isOpen={isOpen} event={groupEvent} />
     </Box>
   );
 }

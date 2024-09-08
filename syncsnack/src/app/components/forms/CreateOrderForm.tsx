@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import {
   Box,
   FormControl,
@@ -14,8 +14,10 @@ import {
   Button,
   VStack,
   Text,
+  Spinner,
+  useToast,
 } from "@chakra-ui/react";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { handleCreateOrder } from "@/app/server-actions/create-order";
 
 const initialState: any = {
@@ -23,13 +25,16 @@ const initialState: any = {
   errors: "",
 };
 
-export default function CreateOrderForm({ eventType }: any) {
+export default function CreateOrderForm({ event, onCloseModal }: any) {
   const [slider1Value, setSlider1Value] = React.useState(0);
   const [slider2Value, setSlider2Value] = React.useState(0);
   const [coffeeType, setCoffeeType] = React.useState("turkish");
   const [description, setDescription] = React.useState("");
   const [state, formAction] = useFormState(handleCreateOrder, initialState);
-  const isCoffeeEvent = eventType === "COFFEE";
+  const isCoffeeEvent = event.eventType === "COFFEE";
+  const groupId: any = localStorage.getItem("GroupId");
+  const toast = useToast();
+  useOrderCreated(state, toast, onCloseModal);
 
   return (
     <Box className="max-w-md mx-auto mt-8 rounded-lg">
@@ -111,14 +116,52 @@ export default function CreateOrderForm({ eventType }: any) {
           <input type="hidden" value={slider2Value} name="sugar" />
           <input type="hidden" value={description} name="desc" />
           <input type="hidden" value={coffeeType} name="type" />
-          <input type="hidden" value={eventType} name="eventType" />
+          <input type="hidden" value={event.eventType} name="eventType" />
+          <input type="hidden" value={event.eventId} name="eventId" />
+          <input type="hidden" value={groupId} name="groupId" />
 
-          <Button type="submit" colorScheme="xblue" className="w-full mb-2">
-            Submit
-          </Button>
-          <Text>{state && state.message}</Text>
+          <Box className="flex justify-center">
+            <SubmitButton />
+          </Box>
+          <Text className="text-sm text-red-500 flex justify-center">
+            {state && state.message}
+          </Text>
         </VStack>
       </form>
     </Box>
   );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      {!pending ? (
+        <Button type="submit" colorScheme="xblue" className="w-full">
+          Submit
+        </Button>
+      ) : (
+        <Spinner />
+      )}
+    </>
+  );
+}
+
+function useOrderCreated(state: any, toast: any, onCloseModal: any) {
+  useLayoutEffect(() => {
+    if (state.message === "Order Created") {
+      onCloseModal();
+      toast({
+        title: "Order Created",
+        description: "",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        colorScheme: "xorange",
+      });
+      state.message = "";
+    }
+  }, [state.message]);
 }

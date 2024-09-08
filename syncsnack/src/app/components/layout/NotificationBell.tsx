@@ -4,25 +4,16 @@ import { BellIcon } from "@heroicons/react/24/solid";
 import { Client } from "@stomp/stompjs";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import { useContext, useEffect, useRef, useState } from "react";
-import { GroupContext } from "../context/GroupContext";
+import { useEffect, useRef, useState } from "react";
 
-/**
- * TODO: Test on  websocket
- */
 export default function NotificationBell() {
   const { data: session, status }: any = useSession();
   const toast = useToast();
   const [isBellNotified, setIsBellNotified] = useState(false);
   const clientRef = useRef<Client | null>(null);
-
   useEffect(() => {
     if (status === "authenticated") {
       const activeUser: any = session.user;
-      console.log("====================");
-      console.log(activeUser.userProfileId);
-      console.log(localStorage.getItem("GroupId"));
-      console.log("====================");
       const client = new Client({
         brokerURL: `ws://localhost:8080/ws`,
         onConnect: () => {
@@ -65,7 +56,9 @@ export default function NotificationBell() {
             },
           );
         },
-        onDisconnect: () => {},
+        onDisconnect: () => {
+          console.log("Disconnected");
+        },
         onStompError: (frame) => {
           console.error("Broker reported error: " + frame.headers["message"]);
           console.error("Additional details: " + frame.body);

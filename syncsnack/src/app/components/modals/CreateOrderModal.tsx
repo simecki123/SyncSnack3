@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import CreateOrderForm from "../forms/CreateOrderForm";
 
-export default function CreateOrderModal({ isOpen, onClose, eventType }: any) {
+export default function CreateOrderModal({ isOpen, onClose, event }: any) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -18,7 +18,7 @@ export default function CreateOrderModal({ isOpen, onClose, eventType }: any) {
         <ModalHeader>Create Order</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <CreateOrderForm eventType={eventType} />
+          <CreateOrderForm event={event} onCloseModal={onClose} />
         </ModalBody>
       </ModalContent>
     </Modal>
