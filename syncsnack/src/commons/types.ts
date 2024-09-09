@@ -19,3 +19,19 @@ export type GroupEvent = {
   pendingUntil: string;
   photoUrl: string;
 };
+
+export type NotificationType = {
+  createdAt: string;
+  description: string;
+  eventId: string;
+  eventType: "FOOD" | "COFFEE" | "BEVERAGE";
+  firstName: string;
+  groupId: string;
+  lastName: string;
+  notificationType: "EVENT" | "ORDER";
+  pendingUntil: string;
+  photoUri: string;
+  title: string;
+  userProfileId: string;
+  profilePhoto: string;
+};

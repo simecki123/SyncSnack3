@@ -1,4 +1,3 @@
-// hooks/useGroups.ts
 import { useState, useEffect } from "react";
 
 interface Group {

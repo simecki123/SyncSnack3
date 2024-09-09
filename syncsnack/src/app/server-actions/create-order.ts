@@ -53,6 +53,8 @@ async function sendCreateOrderRequest(
 }
 
 function validateUserInput(formData: FormData, isCoffeeEventType: boolean) {
+  console.log(formData.get("desc"), "in the server action");
+
   if (isCoffeeEventType) {
     const schema = z.object({
       type: z.string().min(1),
@@ -76,11 +78,11 @@ function validateUserInput(formData: FormData, isCoffeeEventType: boolean) {
     return validatedFields;
   } else {
     const schema = z.object({
-      description: z.string().min(1),
+      desc: z.string().min(1),
     });
 
     const validatedFields = schema.safeParse({
-      description: formData.get("desc"),
+      desc: formData.get("desc"),
     });
 
     if (!validatedFields.success) {

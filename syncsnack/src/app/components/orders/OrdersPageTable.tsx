@@ -9,14 +9,12 @@ import { useRouter } from "next/navigation";
 
 export default function OrdersPageTable({
   accessToken,
-  groupId,
   currentPage,
   input,
   rateFilter,
   statusFilter,
 }: {
   accessToken: string;
-  groupId: string;
   currentPage: number;
   input: string;
   rateFilter: number;
@@ -31,13 +29,13 @@ export default function OrdersPageTable({
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
-        groupId: `${groupId}`,
+        groupId: `${localStorage.getItem("GroupId")}`,
       },
     })
       .then((response) => response.json())
       .then((data) => setOrders(data))
       .catch(() => setOrders([]));
-  }, [currentPage, input, rateFilter, statusFilter, groupId, accessToken]);
+  }, [currentPage, input, rateFilter, statusFilter, accessToken]);
 
   const updateUrlParams = (key: string, value: string | number) => {
     const params = new URLSearchParams(window.location.search);

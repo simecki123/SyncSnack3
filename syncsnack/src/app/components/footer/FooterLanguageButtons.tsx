@@ -29,7 +29,7 @@ export default function FooterLanguageButtons() {
           }
         }}
       >
-        🇭🇷
+        HR
       </Button>
       <Button
         colorScheme="xblue"
@@ -41,7 +41,7 @@ export default function FooterLanguageButtons() {
           }
         }}
       >
-        &#127466;&#127475;&#127468;
+        ENG
       </Button>
     </>
   );

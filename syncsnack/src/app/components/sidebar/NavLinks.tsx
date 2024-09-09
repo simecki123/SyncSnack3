@@ -6,7 +6,6 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
-import { GroupContext } from "../context/GroupContext";
 
 export default function NavLinks({ groupId, onClose }: any) {
   const links = useLinks(groupId);
