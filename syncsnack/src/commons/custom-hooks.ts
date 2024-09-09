@@ -6,7 +6,7 @@ interface Group {
   imageUrl: string;
 }
 
-export function useGroups(accessToken: string, state: any) {
+export function useGroups(accessToken: string, state: any, joinState: any) {
   const [groups, setGroups] = useState<Group[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
@@ -35,7 +35,7 @@ export function useGroups(accessToken: string, state: any) {
     };
 
     fetchGroups();
-  }, [accessToken, state]);
+  }, [accessToken, state, joinState]);
 
   return { groups, error };
 }

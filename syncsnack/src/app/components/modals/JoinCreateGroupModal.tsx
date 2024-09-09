@@ -11,13 +11,15 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import CreateGroupForm from "../forms/CreateGroupForm";
-import { Suspense } from "react";
+import JoinGroupForm from "../forms/JoinGroupForm";
 
 export default function JoinCreateGroupModal({
   isOpen,
   onClose,
   state,
   formAction,
+  joinState,
+  joinFormAction,
 }: any) {
   const t = useTranslations("GroupJoinCreateModal");
 
@@ -35,7 +37,11 @@ export default function JoinCreateGroupModal({
             </TabList>
             <TabPanels>
               <TabPanel>
-                <p>one!</p>
+                <JoinGroupForm
+                  onClose={onClose}
+                  joinState={joinState}
+                  joinFormAction={joinFormAction}
+                />
               </TabPanel>
               <TabPanel>
                 <CreateGroupForm

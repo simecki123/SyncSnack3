@@ -40,7 +40,7 @@ export default function NotificationCard({
               <Image
                 src={photoUri}
                 objectFit="cover"
-                alt={`${firstName} ${lastName}`}
+                fallbackSrc="/template-user.png"
                 boxSize="50px"
                 borderRadius="full"
                 mr="4"

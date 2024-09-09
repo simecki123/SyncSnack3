@@ -15,6 +15,7 @@ import { useFormState } from "react-dom";
 import { handleGroupCreate } from "@/app/server-actions/create-group";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { handleGroupJoin } from "@/app/server-actions/group-join";
 
 const initialState: any = {
   message: null,
@@ -32,7 +33,11 @@ const initialState: any = {
  */
 export default function SidebarGroups({ accessToken }: any) {
   const [state, formAction] = useFormState(handleGroupCreate, initialState);
-  const { groups, error } = useGroups(accessToken, state);
+  const [joinState, joinFormAction] = useFormState(
+    handleGroupJoin,
+    initialState,
+  );
+  const { groups, error } = useGroups(accessToken, state, joinState);
   const [activeGroup, setActiveGroup] = useState(null);
   const searchParams = useSearchParams();
   const groupId = searchParams.get("groupId");
@@ -87,19 +92,21 @@ export default function SidebarGroups({ accessToken }: any) {
       <JoinCreateGroupModal
         state={state}
         formAction={formAction}
+        joinState={joinState}
+        joinFormAction={joinFormAction}
         isOpen={isGroupModalOpen}
         onClose={onGroupModalClose}
       />
-      <Box className="grow flex items-end">
-        {status === "authenticated" && (
-          <Image
-            src={session.user.profileUri}
-            fallbackSrc="/template-user.png"
-            boxSize={14}
-            borderRadius="full"
-          />
-        )}
-      </Box>
     </Box>
   );
 }
+// <Box className="grow flex items-end">
+//   {status === "authenticated" && (
+//     <Image
+//       src={session.user.profileUri}
+//       fallbackSrc="/template-user.png"
+//       boxSize={14}
+//       borderRadius="full"
+//     />
+//   )}
+// </Box>
