@@ -17,12 +17,14 @@ export default async function Layout({
   }
 
   return (
-    <Box className="flex h-screen items-stretch">
-      <Box>
-        <SidebarGroups accessToken={activeUser.accessToken} />
+    <>
+      <Box className="flex h-screen items-stretch">
+        <Box>
+          <SidebarGroups accessToken={activeUser.accessToken} />
+        </Box>
+        <Box className="grow">{children}</Box>
       </Box>
       <NotificationBell />
-      <Box className="grow">{children}</Box>
-    </Box>
+    </>
   );
 }

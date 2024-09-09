@@ -31,13 +31,6 @@ async function sendCreateOrderRequest(
   const session = await auth();
   const activeUser: any = session?.user;
 
-  console.log("====================");
-  console.log(toSendObject);
-  console.log(formData.get("groupId"));
-  console.log("Access token: ", activeUser.accessToken);
-  console.log(`${process.env.BACKEND_URL}/api/orders/create`);
-  console.log("====================");
-
   const res = await fetch(`${process.env.BACKEND_URL}/api/orders/create`, {
     method: "POST",
     headers: {
@@ -53,8 +46,6 @@ async function sendCreateOrderRequest(
 }
 
 function validateUserInput(formData: FormData, isCoffeeEventType: boolean) {
-  console.log(formData.get("desc"), "in the server action");
-
   if (isCoffeeEventType) {
     const schema = z.object({
       type: z.string().min(1),

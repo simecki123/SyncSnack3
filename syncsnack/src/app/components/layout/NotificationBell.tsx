@@ -30,13 +30,10 @@ export default function NotificationBell() {
     <Box
       onClick={onOpen}
       bgColor="xblue.500"
-      className={clsx(
-        "md:fixed md:top-4 md:right-4 md:py-2 md:px-4 rounded-md md:shadow-md",
-        {
-          "md:bg-blue-2 shadow-md animate-[wiggle_0.3s_ease-in-out_infinite]":
-            isBellNotified,
-        },
-      )}
+      className={clsx("fixed top-4 right-4 py-2 px-4 rounded-md shadow-md", {
+        "bg-blue-2 shadow-md animate-[wiggle_0.3s_ease-in-out_infinite]":
+          isBellNotified,
+      })}
     >
       <BellIcon className="size-8" />
       <NotificationDrawer
@@ -72,7 +69,6 @@ function useSubscribeToWS(
                 JSON.parse(message.body).userProfileId !==
                 activeUser.userProfileId
               ) {
-                console.log("new order: ", message.body);
                 setIsBellNotified(true);
                 toast({
                   title: "Order",
@@ -94,7 +90,6 @@ function useSubscribeToWS(
                 JSON.parse(message.body).userProfileId !==
                 activeUser.userProfileId
               ) {
-                console.log("new event: ", message.body);
                 setIsBellNotified(true);
                 const bodyObject = JSON.parse(message.body);
                 const groupEventObject = {
@@ -107,7 +102,6 @@ function useSubscribeToWS(
                   createdAt: bodyObject.createdAt,
                 };
                 setGroupEvents((prev: any) => [...prev, groupEventObject]);
-                console.log(groupEvents);
                 // add message.body to be the first in the list of notifications...
                 setNotifications((prev: any) => [
                   JSON.parse(message.body),

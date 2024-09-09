@@ -18,7 +18,6 @@ export default function NavLinks({ groupId, onClose }: any) {
           key={index}
           href={link.goto}
           onClick={() => {
-            console.log("Setting group context id");
             localStorage.setItem("GroupId", groupId);
             onClose();
           }}

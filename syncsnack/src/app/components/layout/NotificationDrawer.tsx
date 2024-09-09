@@ -55,7 +55,6 @@ function useNotifications(setNotifications: any, status: any, session: any) {
         .then((res) => res.json())
         .then((data: any) => {
           if (data) {
-            console.log(data, "in the fetch");
             setNotifications(data);
           }
         })
