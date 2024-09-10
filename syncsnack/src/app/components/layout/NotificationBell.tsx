@@ -1,6 +1,11 @@
 "use client";
-import { Box, useDisclosure, useToast } from "@chakra-ui/react";
-import { BellIcon } from "@heroicons/react/24/solid";
+import {
+  Box,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+// import { BellIcon } from "@heroicons/react/24/outline";
 import { Client } from "@stomp/stompjs";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
@@ -8,6 +13,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import NotificationDrawer from "./NotificationDrawer";
 import { NotificationType } from "@/commons/types";
 import { GroupEventsContext } from "../Providers";
+import { BellIcon } from "@chakra-ui/icons";
 
 export default function NotificationBell() {
   const { data: session, status }: any = useSession();
@@ -26,16 +32,19 @@ export default function NotificationBell() {
     groupEventContext.groupEvents,
   );
 
+  const bgColor = useColorModeValue("xblue.500", "xblue.400");
+  const bellColor = useColorModeValue("white", "black");
+
   return (
     <Box
       onClick={onOpen}
-      bgColor="xblue.500"
-      className={clsx("fixed top-4 right-4 py-2 px-4 rounded-md shadow-md", {
-        "bg-blue-2 shadow-md animate-[wiggle_0.3s_ease-in-out_infinite]":
+      bgColor={bgColor}
+      className={clsx("py-2 px-4 rounded-md shadow-md", {
+        "bg-yellow-500 shadow-md animate-[wiggle_0.3s_ease-in-out_infinite]":
           isBellNotified,
       })}
     >
-      <BellIcon className="size-8" />
+      <BellIcon boxSize={6} textColor={bellColor} />
       <NotificationDrawer
         isOpen={isOpen}
         onClose={onClose}

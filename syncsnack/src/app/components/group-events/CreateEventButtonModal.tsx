@@ -26,14 +26,13 @@ export default function CreateEventButtonModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userHasEvent, setUserHasEvent] = useState(false);
   const { data: session, status }: any = useSession();
-  const groupId: any = useSearchParams().get("groupId");
   useEffect(() => {
     if (status === "authenticated") {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/active`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${session.user.accessToken}`,
-          groupId: `${groupId}`,
+          groupId: `${localStorage.getItem("GroupId")}`,
         },
       })
         .then((res) => res.json())
@@ -42,7 +41,7 @@ export default function CreateEventButtonModal() {
         })
         .catch((e) => console.info("No current event"));
     }
-  }, [status, isOpen, groupId]);
+  }, [status, isOpen]);
 
   return (
     <Box className="flex justify-center">

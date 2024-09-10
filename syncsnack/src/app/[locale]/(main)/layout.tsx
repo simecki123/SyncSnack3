@@ -1,3 +1,5 @@
+import SignOutButton from "@/app/components/footer/SignOutButton";
+import MenuLayout from "@/app/components/layout/MenuLayout";
 import NotificationBell from "@/app/components/layout/NotificationBell";
 import SidebarGroups from "@/app/components/sidebar/SidebarGroups";
 import { auth } from "@/commons/auth";
@@ -24,7 +26,11 @@ export default async function Layout({
         </Box>
         <Box className="grow">{children}</Box>
       </Box>
-      <NotificationBell />
+      <Box className="fixed top-4 right-4 flex items-center space-x-6">
+        <MenuLayout />
+        <SignOutButton />
+        <NotificationBell />
+      </Box>
     </>
   );
 }

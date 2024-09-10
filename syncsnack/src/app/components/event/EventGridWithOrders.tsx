@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import UserEventCard from "./UserEventCard";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Text } from "@chakra-ui/react";
 
 export default function EventGridWithOrders() {
   const { data: session, status }: any = useSession();
@@ -14,6 +14,7 @@ export default function EventGridWithOrders() {
     <Box className="grid grid-cols-1 md:grid-cols-3">
       <Box className="flex flex-col items-center col-span-3">
         <UserEventCard event={event} orders={orders} />
+        <Divider className="mt-4" />
       </Box>
       {orders &&
         orders.map((order: any, index: any) => {

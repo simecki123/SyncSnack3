@@ -26,6 +26,7 @@ export const config = {
     "/login",
     "/register",
     "/profile",
+    "/settings",
     "/setprofile",
     "/group-events",
     "/orders",

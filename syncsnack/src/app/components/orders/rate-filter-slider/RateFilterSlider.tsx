@@ -27,15 +27,15 @@ export default function RateFilterSlider({ setRateFilter }: any) {
             {value === 0 ? `${t("Select-option-all")}` : "★"}
           </SliderMark>
         ))}
-        <SliderTrack bg="xred.200" h="3px" className="">
-          <SliderFilledTrack bg="xred.500" />
+        <SliderTrack bg="xblue.200" h="3px" className="">
+          <SliderFilledTrack bg="xblue.500" />
         </SliderTrack>
         <SliderThumb
           boxSize={6}
-          bg="xred.500"
-          borderColor="xred.600"
+          bg="xblue.500"
+          borderColor="xblue.600"
           borderWidth="2px"
-          _focus={{ boxShadow: `0 0 0 3px xred.500` }}
+          _focus={{ boxShadow: `0 0 0 3px xblue.500` }}
         />
       </Slider>
     </Box>

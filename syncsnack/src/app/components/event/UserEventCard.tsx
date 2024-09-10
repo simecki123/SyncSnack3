@@ -25,7 +25,7 @@ export default function UserEventCard({ event, orders }: any) {
 
   if (!event) {
     return (
-      <Box className="mt-20 mx-2 px-40 py-16 border rounded-lg md:mt-2">
+      <Box className="mt-20 mx-2 px-40 py-16 border rounded-lg md:mt-4">
         <Spinner />
       </Box>
     );
