@@ -1,11 +1,28 @@
 "use client";
 
-import { Box, Button, Input, Spinner, Tag, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Input,
+  Spinner,
+  Tag,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function UserEventCard({ event, orders }: any) {
   // TODO: get orderId from orders
+  let orderIds: string[] | undefined;
+  if (orders) {
+    orderIds = orders.map((order: any) => order.orderId);
+  }
+  const { data: session, status }: any = useSession();
+  const toast = useToast();
+  const router = useRouter();
+
   if (!event) {
     return (
       <Box className="mt-20 mx-2 px-40 py-16 border rounded-lg md:mt-2">
@@ -13,26 +30,52 @@ export default function UserEventCard({ event, orders }: any) {
       </Box>
     );
   }
-  //
-  // function handleOrders(newStatus: string, orderId: string): void {
-  //   const response = fetch(
-  //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/update?orderId=${orderId}&status=${newStatus}`,
-  //     {
-  //       method: "PATCH",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${userToken}`,
-  //       },
-  //     },
-  //   );
-  //   if (!response.ok) {
-  //     throw new Error("Failed to update order status");
-  //   }
-  // }
-  //
-  // function handleAllOrders(newStatus: string) {
-  //
-  // }
+
+  function handleAllOrders(newStatus: string) {
+    console.log("updating all orders:", status);
+    if (!orderIds) {
+      toast({
+        title: "No orders to update",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        colorScheme: "xred",
+      });
+      return;
+    }
+    if (status === "authenticated") {
+      orderIds.forEach((orderId) => {
+        fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/update?orderId=${orderId}&status=${newStatus}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+          },
+        );
+      });
+      console.log("================================");
+      console.log("Event ID: ", event.eventId);
+      console.log("Access token: ", session.user.accessToken);
+      console.log(
+        `path: ${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/update?eventId=${event.eventId}&status=COMPLETED`,
+      );
+      console.log("================================");
+      fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/update?eventId=${event.eventId}&status=COMPLETED`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.user.accessToken}`,
+          },
+        },
+      );
+      router.push("/group-events");
+    }
+  }
 
   return (
     <Box
@@ -50,8 +93,15 @@ export default function UserEventCard({ event, orders }: any) {
       </Box>
 
       <Box className="flex justify-center space-x-2">
-        <Button colorScheme="xblue">Finish</Button>
-        <Button colorScheme="xred">Cancel</Button>
+        <Button
+          onClick={() => handleAllOrders("COMPLETED")}
+          colorScheme="xblue"
+        >
+          Finish
+        </Button>
+        <Button onClick={() => handleAllOrders("CANCELLED")} colorScheme="xred">
+          Cancel
+        </Button>
       </Box>
     </Box>
   );
