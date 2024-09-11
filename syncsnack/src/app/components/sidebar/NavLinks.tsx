@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import {
   CakeIcon,
+  CalendarDaysIcon,
   CommandLineIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
@@ -34,13 +35,18 @@ function useLinks(groupId: any) {
   const [links, setLinks] = useState([
     {
       name: "Group events",
-      goto: `/group-events?groupId=${groupId}`,
-      icon: UserGroupIcon,
+      goto: `/group-events`,
+      icon: CalendarDaysIcon,
     },
     {
       name: "Orders",
-      goto: `orders?${groupId}`,
+      goto: `orders`,
       icon: CommandLineIcon,
+    },
+    {
+      name: "Group Information",
+      goto: "/group",
+      icon: UserGroupIcon,
     },
   ]);
 

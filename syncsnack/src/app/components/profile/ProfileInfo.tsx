@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import EditProfileModal from "./EditProfileModal";
 
 export default function ProfileInfo({ userProfileData }: any) {
+  // how should i handle if userProfile data doesnt have photoUrl?
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [profilePicture, setProfilePicture] = useState<string>(
-    userProfileData.photoUrl,
+  const [profilePicture, setProfilePicture] = useState(
+    userProfileData?.photoUrl,
   );
+
+  console.log("profile data: ", userProfileData);
 
   return (
     <>

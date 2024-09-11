@@ -33,15 +33,18 @@ export default function NotificationBell() {
   );
 
   const bgColor = useColorModeValue("xblue.500", "xblue.400");
+  const bgColorN = useColorModeValue("yellow.500", "yellow.400");
   const bellColor = useColorModeValue("white", "black");
 
   return (
     <Box
-      onClick={onOpen}
-      bgColor={bgColor}
+      onClick={() => {
+        onOpen();
+        setIsBellNotified(false);
+      }}
+      bgColor={isBellNotified ? bgColorN : bgColor}
       className={clsx("py-2 px-4 rounded-md shadow-md", {
-        "bg-yellow-500 shadow-md animate-[wiggle_0.3s_ease-in-out_infinite]":
-          isBellNotified,
+        "shadow-md animate-[wiggle_0.3s_ease-in-out_infinite]": isBellNotified,
       })}
     >
       <BellIcon boxSize={6} textColor={bellColor} />

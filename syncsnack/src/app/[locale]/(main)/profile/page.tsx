@@ -9,8 +9,6 @@ export default async function ProfilePage() {
   const userProfileData = await fetchProfileData(activeUser);
   const userProfileOrderStats = await fetchProfileOrdersStats(activeUser);
 
-  console.log("userProfileStats again:", userProfileOrderStats);
-
   return (
     <Box className="flex h-4/5 justify-center items-center">
       <ProfileInfo userProfileData={userProfileData} />
@@ -30,7 +28,7 @@ async function fetchProfileData(activeUser: any) {
     },
   )
     .then((res) => res.json())
-    .catch((err) => console.error(err));
+    .catch((err) => console.error("it breaks here: ", err));
   return userProfileData;
 }
 
@@ -46,7 +44,6 @@ async function fetchProfileOrdersStats(activeUser: any) {
   )
     .then((res) => res.json())
     .catch((err) => console.error(err));
-  console.log("userProfileOrderStats:", userProfileOrderStats);
   return fillMissingCounts(userProfileOrderStats);
 }
 

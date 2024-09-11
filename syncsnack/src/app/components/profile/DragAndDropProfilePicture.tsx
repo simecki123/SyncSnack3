@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import { Input, Button, VStack, Text, Box, Spinner } from "@chakra-ui/react";
 import { useDropzone } from "react-dropzone";
 import { DownloadIcon } from "@chakra-ui/icons";
+import { useSession } from "next-auth/react";
 
 /**
  * Gpt generated file, good luck
@@ -14,6 +14,7 @@ export default function DragAndDropProfilePicture({
   onClose,
 }: any) {
   const { data: session, status: sessionStatus } = useSession();
+  console.log("some auth stuff: ", session, sessionStatus);
   const [uploadStatus, setUploadStatus] = useState<string>("");
   const [errorDetails, setErrorDetails] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,9 +34,14 @@ export default function DragAndDropProfilePicture({
       return;
     }
 
+    console.log("session", session);
+    console.log("status", sessionStatus);
+
     for (const file of files) {
       const formData = new FormData();
       formData.append("file", file);
+
+      console.log("user token", session.user.accessToken);
 
       try {
         setLoading(true);
@@ -58,7 +64,6 @@ export default function DragAndDropProfilePicture({
           onClose();
         } else {
           const errorResponse = await tryParseJSON(response); // Safely parse JSON
-          console.log("Error Response:", errorResponse); // Log error response for debugging
           setUploadStatus("File upload failed.");
           setErrorDetails(
             `Error ${response.status}: ${JSON.stringify(errorResponse)}`,
@@ -67,7 +72,7 @@ export default function DragAndDropProfilePicture({
       } catch (error) {
         console.error("Error uploading file:", error); // Log error details
         setUploadStatus("An error occurred while uploading the file.");
-        setErrorDetails(error.message);
+        setErrorDetails(`custom er:${error.message}`);
       }
     }
   };

@@ -2,17 +2,14 @@
 
 import { Box } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import GroupEventCard from "./GroupEventCard";
 import { GroupEventsContext } from "../Providers";
 
 export default function GroupEvents() {
   const groupEventContext = useContext(GroupEventsContext);
-  const searchParams = useSearchParams();
-  const groupId = searchParams.get("groupId");
   const { data: session, status }: any = useSession();
-  useGroupEvents(groupId, groupEventContext.setGroupEvents, status, session);
+  useGroupEvents(groupEventContext.setGroupEvents, status, session);
 
   return (
     <Box className="mt-4 grid grid-cols-1 md:grid-cols-3 md:m-20 gap-4">
@@ -27,12 +24,7 @@ export default function GroupEvents() {
   );
 }
 
-function useGroupEvents(
-  groupId: any,
-  setGroupEvents: any,
-  status: any,
-  session: any,
-) {
+function useGroupEvents(setGroupEvents: any, status: any, session: any) {
   useEffect(() => {
     if (status === "authenticated") {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/filter`, {
@@ -40,7 +32,7 @@ function useGroupEvents(
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${session.user.accessToken}`,
-          groupId: `${groupId}`,
+          groupId: `${localStorage.getItem("GroupId")}`,
         },
         body: JSON.stringify({ status: "PENDING", eventType: null }),
       })
@@ -52,5 +44,5 @@ function useGroupEvents(
         })
         .catch((e) => console.info(e.message));
     }
-  }, [groupId, status]);
+  }, [status]);
 }

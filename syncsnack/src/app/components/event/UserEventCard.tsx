@@ -32,7 +32,6 @@ export default function UserEventCard({ event, orders }: any) {
   }
 
   function handleAllOrders(newStatus: string) {
-    console.log("updating all orders:", status);
     if (!orderIds) {
       toast({
         title: "No orders to update",
@@ -56,13 +55,6 @@ export default function UserEventCard({ event, orders }: any) {
           },
         );
       });
-      console.log("================================");
-      console.log("Event ID: ", event.eventId);
-      console.log("Access token: ", session.user.accessToken);
-      console.log(
-        `path: ${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/update?eventId=${event.eventId}&status=COMPLETED`,
-      );
-      console.log("================================");
       fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/events/update?eventId=${event.eventId}&status=COMPLETED`,
         {

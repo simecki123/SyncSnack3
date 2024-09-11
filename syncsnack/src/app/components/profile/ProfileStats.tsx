@@ -7,8 +7,6 @@ export default function ProfileStats({ stats }: any) {
   const bgColorIn = useColorModeValue("gray.200", "gray.700");
   const textColor = useColorModeValue("white", "white");
 
-  console.log("stats:", stats);
-
   return (
     <Box className="md:flex space-y-8 md:space-y-0">
       <Box className="space-y-8">

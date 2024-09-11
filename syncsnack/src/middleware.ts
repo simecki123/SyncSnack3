@@ -24,11 +24,13 @@ export const config = {
   matcher: [
     "/",
     "/login",
+    "/join",
     "/register",
     "/profile",
     "/settings",
     "/setprofile",
     "/group-events",
+    "/group",
     "/orders",
     "/event",
     "/forgot-password",

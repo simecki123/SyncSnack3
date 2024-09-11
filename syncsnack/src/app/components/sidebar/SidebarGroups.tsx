@@ -39,8 +39,6 @@ export default function SidebarGroups({ accessToken }: any) {
   );
   const { groups, error } = useGroups(accessToken, state, joinState);
   const [activeGroup, setActiveGroup] = useState(null);
-  const searchParams = useSearchParams();
-  const groupId = searchParams.get("groupId");
   const { data: session, status }: any = useSession();
 
   /**
@@ -64,8 +62,14 @@ export default function SidebarGroups({ accessToken }: any) {
         <Image
           key={index}
           borderRadius="full"
-          border={groupId === group.groupId ? "solid 4px" : ""}
-          borderColor={groupId === group.groupId ? "xorange.500" : ""}
+          border={
+            localStorage.getItem("GroupId") === group.groupId ? "solid 4px" : ""
+          }
+          borderColor={
+            localStorage.getItem("GroupId") === group.groupId
+              ? "xorange.500"
+              : ""
+          }
           objectFit="cover"
           src={group.photoUrl}
           fallbackSrc="/fallback-group.png"

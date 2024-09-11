@@ -8,8 +8,6 @@ export default function InviteButton() {
   const [url, setUrl] = useState("...");
   const toast = useToast();
 
-  console.log(url);
-
   return (
     <Button
       className="w-full"
@@ -43,8 +41,9 @@ function handleInvite(setUrl: any, session: any, toast: any) {
         isClosable: true,
       });
 
-      navigator.clipboard.writeText(data);
-      // TODO: take the code out of the link and then make a page to redirect
+      const lista = data.split("/");
+      const code = lista[lista.length - 1];
+      navigator.clipboard.writeText(`http://localhost:3000/join?code=${code}`);
     })
     .catch((e) => console.log(e));
 }
