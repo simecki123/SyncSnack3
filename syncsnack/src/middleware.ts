@@ -33,6 +33,7 @@ export const config = {
     "/group",
     "/orders",
     "/event",
+    "/test",
     "/forgot-password",
     "/(hr|en)/:path*",
   ],

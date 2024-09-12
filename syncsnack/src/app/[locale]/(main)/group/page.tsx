@@ -1,3 +1,4 @@
+import AdminButtons from "@/app/components/group/AdminButtons";
 import GroupData from "@/app/components/group/GroupData";
 import MembersTable from "@/app/components/group/MembersTable";
 import { auth } from "@/commons/auth";
@@ -9,8 +10,10 @@ export default async function GroupPage() {
   return (
     <Box className="pt-16 md:pt-4 md:grid md:grid-cols-2 md:gap-10 md:grid-rows-[1fr_70%] md:h-screen md:ml-6">
       <GroupData session={session} />
-      <Text>placeholder</Text>
-      <MembersTable session={session} />
+      <AdminButtons />
+      <Box className="flex flex-col h-full p-10">
+        <MembersTable session={session} />
+      </Box>
     </Box>
   );
 }

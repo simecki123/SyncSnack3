@@ -39,3 +39,63 @@ export function useGroups(accessToken: string, state: any, joinState: any) {
 
   return { groups, error };
 }
+
+export function useMembersData(
+  currentPage: any,
+  jwtToken: any,
+  pageSize: any,
+  setCurrentPage: any,
+  setDisableForward: any,
+  setLoading: any,
+  setMembers: any,
+  session: any,
+) {
+  useEffect(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/members?page=${currentPage}&size=${pageSize}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+          groupId: `${localStorage.getItem("GroupId")}`,
+        },
+      },
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setMembers(data);
+        setLoading(false);
+        if (data.length === 0) {
+          setCurrentPage(currentPage - 1);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching group data:", error);
+      });
+  }, [session, currentPage]);
+
+  useEffect(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/members?page=${currentPage + 1}&size=${pageSize}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+          groupId: `${localStorage.getItem("GroupId")}`,
+        },
+      },
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("members", data);
+        if (data.length === 0) {
+          setDisableForward(true);
+        } else {
+          setDisableForward(false);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching group data:", error);
+      });
+  }, [session, currentPage]);
+}
