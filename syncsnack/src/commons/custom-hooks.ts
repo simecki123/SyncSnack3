@@ -49,6 +49,7 @@ export function useMembersData(
   setLoading: any,
   setMembers: any,
   session: any,
+  setTransformRoles: any,
 ) {
   useEffect(() => {
     fetch(
@@ -64,10 +65,22 @@ export function useMembersData(
       .then((res) => res.json())
       .then((data) => {
         setMembers(data);
-        setLoading(false);
         if (data.length === 0) {
           setCurrentPage(currentPage - 1);
         }
+
+        fetch(
+          `http://localhost:3000/api/roles/${localStorage.getItem("GroupId")}`,
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setTransformRoles(data[0]);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log("FAILED TO GET NEW ROLES", error.message);
+            setLoading(false);
+          });
       })
       .catch((error) => {
         console.log("Error fetching group data:", error);

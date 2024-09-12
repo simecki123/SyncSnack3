@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { useColorModeValue, TableContainer, Image } from "@chakra-ui/react";
 import { Button, Spinner, IconButton } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Table component that displays group members.
@@ -18,7 +18,8 @@ export default function MembersTable({ session }: any) {
   const outlineRoleColor = useColorModeValue("xorange.200", "xorange.600");
   const [currentPage, setCurrentPage] = useState(0);
   const [disableForward, setDisableForward] = useState(false);
-  const pageSize = 5;
+  const [transformRoles, setTransformRoles]: any = useState();
+  const pageSize = 4;
   useMembersData(
     currentPage,
     jwtToken,
@@ -28,7 +29,14 @@ export default function MembersTable({ session }: any) {
     setLoading,
     setMembers,
     session,
+    setTransformRoles,
   );
+
+  useEffect(() => {
+    if (transformRoles) {
+      console.log("transformed roles  in the effe", transformRoles);
+    }
+  }, [transformRoles]);
 
   if (loading) {
     return (
@@ -80,7 +88,15 @@ export default function MembersTable({ session }: any) {
                       borderColor={outlineRoleColor}
                       borderWidth="1px"
                     >
-                      {role}
+                      {transformRoles
+                        ? role === "USER"
+                          ? transformRoles.user
+                          : role === "ADMIN"
+                            ? transformRoles.admin
+                            : role === "PRESIDENT"
+                              ? transformRoles.president
+                              : role
+                        : role}
                     </Text>
                   ))}
                 </Td>
