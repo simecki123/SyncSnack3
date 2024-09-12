@@ -1,7 +1,17 @@
 "use client";
 import { useMembersData } from "@/commons/custom-hooks";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  useToast,
+} from "@chakra-ui/react";
 import { useColorModeValue, TableContainer, Image } from "@chakra-ui/react";
 import { Button, Spinner, IconButton } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -11,6 +21,7 @@ import { useEffect, useState } from "react";
  * Includes pagination buttons.
  */
 export default function MembersTable({ session }: any) {
+  const toast = useToast();
   const jwtToken: any = session.user.accessToken;
   const [members, setMembers]: any = useState();
   const [loading, setLoading] = useState(true);
@@ -20,6 +31,7 @@ export default function MembersTable({ session }: any) {
   const [disableForward, setDisableForward] = useState(false);
   const [transformRoles, setTransformRoles]: any = useState();
   const pageSize = 4;
+  console.log(members);
   useMembersData(
     currentPage,
     jwtToken,
@@ -28,15 +40,9 @@ export default function MembersTable({ session }: any) {
     setDisableForward,
     setLoading,
     setMembers,
-    session,
+    session,API_URL
     setTransformRoles,
   );
-
-  useEffect(() => {
-    if (transformRoles) {
-      console.log("transformed roles  in the effe", transformRoles);
-    }
-  }, [transformRoles]);
 
   if (loading) {
     return (
@@ -81,7 +87,7 @@ export default function MembersTable({ session }: any) {
                 </Td>
                 <Td>
                   {member.roles.map((role: any, index: any) => (
-                    <Text
+                    <TextAPI_URL
                       key={index}
                       className="px-3 py-2 inline rounded-xl font-semibold mr-1"
                       color={textRoleColor}
@@ -101,7 +107,11 @@ export default function MembersTable({ session }: any) {
                   ))}
                 </Td>
                 <Td className="space-x-1">
-                  <Button variant="outline" colorScheme="xred">
+                  <Button
+                    variant="outline"
+                    colorScheme="xred"
+                    onClick={() => kickUser(member, jwtToken, toast)}
+                  >
                     Kick user
                   </Button>
                   <Button variant="outline">Give Role</Button>
@@ -134,4 +144,46 @@ export default function MembersTable({ session }: any) {
       </Box>
     </>
   );
+}
+
+function kickUser(toKickUser: any, jwtToken: any, toast: any): void {
+  fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/kick?userProfileId=${toKickUser.userProfileId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+        groupId: `${localStorage.getItem("GroupId")}`,
+      },
+    },
+  )
+    .then((res) => {
+      if (!res.ok) {
+        console.log("cant kick", res.status);
+        toast({
+          title: "Can't kick user",
+          description: "You are not allowed to kick this user",
+          status: "error",
+          duration: 3000,
+        });
+      } else {
+        toast({
+          title: "Kicked user",
+          description: "User has been kicked from the group",
+          status: "warning",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    })
+    .catch((error: any) => {
+      console.log("cant kick", error.message);
+      toast({
+        title: "Can't kick user",
+        description: "You are not allowed to kick this user",
+        status: "error",
+        duration: 3000,
+      });
+    });
 }
