@@ -40,7 +40,7 @@ export default function MembersTable({ session }: any) {
     setDisableForward,
     setLoading,
     setMembers,
-    session,API_URL
+    session,
     setTransformRoles,
   );
 
@@ -87,7 +87,7 @@ export default function MembersTable({ session }: any) {
                 </Td>
                 <Td>
                   {member.roles.map((role: any, index: any) => (
-                    <TextAPI_URL
+                    <Text
                       key={index}
                       className="px-3 py-2 inline rounded-xl font-semibold mr-1"
                       color={textRoleColor}
@@ -154,7 +154,7 @@ function kickUser(toKickUser: any, jwtToken: any, toast: any): void {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwtToken}`,
-        groupId: `${localStorage.getItem("GroupId")}`,
+        groupId: `${localStorage.getItem("groupId")}`,
       },
     },
   )
