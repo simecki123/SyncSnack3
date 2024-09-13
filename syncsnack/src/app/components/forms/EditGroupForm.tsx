@@ -1,12 +1,14 @@
 "use client";
 import { Box, Button, Spinner, Text, useToast } from "@chakra-ui/react";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { UpdateGroupsSidebarContext } from "../Providers";
 
 export default function EditGroupForm({ session, onClose, setReload }: any) {
   const [isSubmitButtonShown, setIsSubmitButtonShown] = useState(false);
   const [groupProfileImage, setGroupProfileImage]: any = useState();
   const [loading, setLoading] = useState(false);
+  const updateSidebarContext = useContext(UpdateGroupsSidebarContext);
   const toast = useToast();
   const onDrop = useCallback((acceptedFiles: any) => {
     console.log(acceptedFiles[0]);
@@ -35,6 +37,7 @@ export default function EditGroupForm({ session, onClose, setReload }: any) {
         onClose();
         setReload((prev: any) => prev + "1");
         setLoading(false);
+        updateSidebarContext.setUpdateString((prev: any) => prev + "1");
         toast({
           title: "Group image uploaded successfully!",
           status: "success",

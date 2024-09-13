@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { UpdateGroupsSidebarContext } from "@/app/components/Providers";
+import { useState, useEffect, useContext } from "react";
 
 interface Group {
   id: string;
@@ -9,6 +10,7 @@ interface Group {
 export function useGroups(accessToken: string, state: any, joinState: any) {
   const [groups, setGroups] = useState<Group[]>([]);
   const [error, setError] = useState<Error | null>(null);
+  const updateSidebarContext = useContext(UpdateGroupsSidebarContext);
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -35,7 +37,7 @@ export function useGroups(accessToken: string, state: any, joinState: any) {
     };
 
     fetchGroups();
-  }, [accessToken, state, joinState]);
+  }, [accessToken, state, joinState, updateSidebarContext.updateString]);
 
   return { groups, error };
 }
