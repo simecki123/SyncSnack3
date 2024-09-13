@@ -50,6 +50,7 @@ export function useMembersData(
   setMembers: any,
   session: any,
   setTransformRoles: any,
+  setUserRoles: any,
 ) {
   useEffect(() => {
     fetch(
@@ -100,7 +101,6 @@ export function useMembersData(
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("members", data);
         if (data.length === 0) {
           setDisableForward(true);
         } else {
@@ -110,5 +110,19 @@ export function useMembersData(
       .catch((error) => {
         console.log("Error fetching group data:", error);
       });
+
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/roles`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.user.accessToken}`,
+        groupId: `${localStorage.getItem("GroupId")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("user roles in the members data table fetch", data);
+        setUserRoles(data.roles);
+      })
+      .catch((e) => console.log("puca u /api/groups/roles", e.message));
   }, [session, currentPage]);
 }

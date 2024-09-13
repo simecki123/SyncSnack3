@@ -1,15 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Text, Heading, Spinner, Image, Tag } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Heading,
+  Spinner,
+  Image,
+  Tag,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
+import EditGroupModal from "../modals/EditGroupModal";
 
 export default function GroupData({ session }: any) {
+  const [reload, setReload] = useState("");
   const jwtToken = session.user.accessToken;
   const [group, setGroup]: any = useState();
   const [isLoading, setLoading] = useState(true);
   const [isLoadingRoles, setIsLoadingRoles] = useState(true);
-  useGroupData(jwtToken, setGroup, setLoading, session);
+  useGroupData(jwtToken, setGroup, setLoading, session, reload);
   const [userRoles, setUserRoles]: any = useState();
   const [transfromRoles, setTransfromRoles] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   useMemberRole(
     jwtToken,
     setUserRoles,
@@ -35,17 +47,31 @@ export default function GroupData({ session }: any) {
 
   return (
     <Box className="flex items-center space-x-4 justify-center">
-      <Image
-        objectFit="cover"
-        rounded="full"
-        boxSize={44}
-        borderRadius="full"
-        border="solid"
-        borderColor="xblue.400"
-        borderWidth={3}
-        src={group.photoUrl}
-        fallbackSrc="/template-user.png"
-      />
+      <Box position="relative">
+        <Image
+          objectFit="cover"
+          rounded="full"
+          boxSize={44}
+          borderRadius="full"
+          border="solid"
+          borderColor="xblue.400"
+          borderWidth={3}
+          src={group.photoUrl}
+          fallbackSrc="/fallback-group.png"
+        />
+        <Heading
+          position="absolute"
+          top="20%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          color="white"
+          fontWeight="bold"
+          zIndex="1"
+          className="text-2xl"
+        >
+          &nbsp;
+        </Heading>
+      </Box>
       <Box className="flex flex-col items-center">
         <Heading>{group.name}</Heading>
         <Text>{group.description}</Text>
@@ -60,7 +86,21 @@ export default function GroupData({ session }: any) {
               );
             })}
         </Box>
+        <Button
+          onClick={onOpen}
+          variant="outline"
+          colorScheme="xblue"
+          className="mt-10"
+        >
+          Edit Group
+        </Button>
       </Box>
+      <EditGroupModal
+        onClose={onClose}
+        isOpen={isOpen}
+        session={session}
+        setReload={setReload}
+      />
     </Box>
   );
 }
@@ -70,6 +110,7 @@ function useGroupData(
   setGroup: any,
   setLoading: any,
   session: any,
+  reload: any,
 ) {
   useEffect(() => {
     fetch(
@@ -89,7 +130,7 @@ function useGroupData(
       .catch((error) => {
         console.error("Error fetching group data:", error);
       });
-  }, [session, jwtToken]);
+  }, [session, jwtToken, reload]);
 }
 function useMemberRole(
   jwtToken: any,
@@ -108,7 +149,6 @@ function useMemberRole(
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("user roles: ", data.roles);
         setUserRoles(data.roles);
         setIsLoadingRoles(false);
       })

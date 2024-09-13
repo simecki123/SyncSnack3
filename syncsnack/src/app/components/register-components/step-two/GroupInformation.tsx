@@ -32,7 +32,7 @@ export default function GroupInformation({ formData, handleInputChange }: any) {
           <FormControl className="mb-4">
             <FormLabel>{t("GroupName")}</FormLabel>
             <Input
-              placeholder={t('GroupName')}
+              placeholder={t("GroupName")}
               name="groupName"
               value={formData.groupName}
               onChange={handleInputChange}
@@ -42,12 +42,11 @@ export default function GroupInformation({ formData, handleInputChange }: any) {
             <FormLabel>{t("GroupPassword")}</FormLabel>
             <CustomPasswordInput
               placeholder={t("GroupPassword")}
-              name="groupPassword" 
+              name="groupPassword"
               id="groupPassword"
               value={formData.groupPassword}
               onChange={handleInputChange}
-             />
-            
+            />
           </FormControl>
         </>
       )}
@@ -56,7 +55,7 @@ export default function GroupInformation({ formData, handleInputChange }: any) {
           <FormControl className="mb-4">
             <FormLabel>{t("GroupName")}</FormLabel>
             <Input
-            placeholder={t("GroupName")}
+              placeholder={t("GroupName")}
               name="groupName"
               value={formData.groupName}
               onChange={handleInputChange}
@@ -75,16 +74,14 @@ export default function GroupInformation({ formData, handleInputChange }: any) {
             <FormLabel>{t("GroupPassword")}</FormLabel>
             <CustomPasswordInput
               placeholder={t("GroupPassword")}
-              name="groupPassword" 
+              name="groupPassword"
               id="groupPassword"
               value={formData.groupPassword}
               onChange={handleInputChange}
-             />
-            
+            />
           </FormControl>
         </>
       )}
     </>
   );
 }
-

@@ -14,7 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { useColorModeValue, TableContainer, Image } from "@chakra-ui/react";
 import { Button, Spinner, IconButton } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserRolesContext } from "../Providers";
 
 /**
  * Table component that displays group members.
@@ -30,8 +31,9 @@ export default function MembersTable({ session }: any) {
   const [currentPage, setCurrentPage] = useState(0);
   const [disableForward, setDisableForward] = useState(false);
   const [transformRoles, setTransformRoles]: any = useState();
+  const [userRoles, setUserRoles]: any = useState([]);
+  const userRolesContext = useContext(UserRolesContext);
   const pageSize = 4;
-  console.log(members);
   useMembersData(
     currentPage,
     jwtToken,
@@ -42,6 +44,7 @@ export default function MembersTable({ session }: any) {
     setMembers,
     session,
     setTransformRoles,
+    setUserRoles,
   );
 
   if (loading) {
@@ -52,21 +55,20 @@ export default function MembersTable({ session }: any) {
     );
   }
 
+  userRolesContext.setUserRoles(userRoles);
+
   return (
     <>
       <TableContainer>
-        <Table
-          variant="unstyled"
-          colorScheme="xblue"
-          className="shadow-lg"
-          borderWidth="2px"
-          borderColor="xblue.400"
-        >
+        <Table variant="unstyled" colorScheme="xblue" className="shadow-lg">
           <Thead>
             <Tr>
               <Th>Name</Th>
               <Th>Role</Th>
-              <Th>Actions</Th>
+              {userRoles.includes("PRESIDENT") ||
+              userRoles.includes("ADMIN") ? (
+                <Th>Actions</Th>
+              ) : null}
             </Tr>
           </Thead>
           <Tbody>
@@ -106,16 +108,20 @@ export default function MembersTable({ session }: any) {
                     </Text>
                   ))}
                 </Td>
-                <Td className="space-x-1">
-                  <Button
-                    variant="outline"
-                    colorScheme="xred"
-                    onClick={() => kickUser(member, jwtToken, toast)}
-                  >
-                    Kick user
-                  </Button>
-                  <Button variant="outline">Give Role</Button>
-                </Td>
+                {(userRoles.includes("PRESIDENT") ||
+                  userRoles.includes("ADMIN")) &&
+                member.userProfileId !== session.user.userProfileId ? (
+                  <Td className="space-x-1">
+                    <Button
+                      variant="outline"
+                      colorScheme="xred"
+                      onClick={() => kickUser(member, jwtToken, toast)}
+                    >
+                      Kick user
+                    </Button>
+                    <Button variant="outline">Give Admin</Button>
+                  </Td>
+                ) : null}
               </Tr>
             ))}
           </Tbody>

@@ -9,15 +9,23 @@ export const GroupEventsContext = createContext({
   setGroupEvents: (value: any) => {},
 });
 
+export const UserRolesContext = createContext({
+  userRoles: [],
+  setUserRoles: (value: any) => {},
+});
+
 export function Providers({ children }: { children: React.ReactNode }) {
   const [groupEvents, setGroupEvents] = useState([]);
+  const [userRoles, setUserRoles] = useState([]);
 
   return (
-    <GroupEventsContext.Provider value={{ groupEvents, setGroupEvents }}>
-      <SessionProvider>
-        <ColorModeScript initialColorMode={"light"} />
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
-      </SessionProvider>
-    </GroupEventsContext.Provider>
+    <UserRolesContext.Provider value={{ userRoles, setUserRoles }}>
+      <GroupEventsContext.Provider value={{ groupEvents, setGroupEvents }}>
+        <SessionProvider>
+          <ColorModeScript initialColorMode={"light"} />
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        </SessionProvider>
+      </GroupEventsContext.Provider>
+    </UserRolesContext.Provider>
   );
 }
