@@ -27,7 +27,7 @@ const initialState: any = {
  * due to the ButtonGroup
  */
 export default function CreateEventForm({ onCloseModal }: any) {
-  const groupId: any = useSearchParams().get("groupId");
+  const groupId: any = localStorage.getItem("GroupId");
   const toast = useToast();
   const [state, formAction] = useFormState(handleCreateEvent, initialState);
   useEventCreated(state, toast, onCloseModal);

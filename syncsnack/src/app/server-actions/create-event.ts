@@ -23,9 +23,17 @@ async function sendCreateEventRequest(
   validatedFields: any,
   formData: FormData,
 ) {
+  console.log(
+    "validatedFields",
+    validatedFields,
+    " > ",
+    formData.get("groupId"),
+  );
+  console.log(`${process.env.BACKEND_URL}/api/events/create`);
+
   const session = await auth();
   const activeUser: any = session?.user;
-  const res = await fetch(`${process.env.BACKEND_URL}/api/events/create`, {
+  await fetch(`${process.env.BACKEND_URL}/api/events/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,10 +41,9 @@ async function sendCreateEventRequest(
       groupId: `${formData.get("groupId")}`,
     },
     body: JSON.stringify(validatedFields.data),
+  }).catch((e) => {
+    throw new Error(`Failed to create event ${e.message}`);
   });
-  if (!res.ok) {
-    throw new Error("Failed to create event");
-  }
 }
 
 function validateUserInput(formData: FormData) {

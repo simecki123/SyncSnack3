@@ -24,8 +24,6 @@ export async function createUserProfile(data: UserProfileData) {
       type: "application/json",
     });
 
-    console.log("blob: ====: ", jsonBlob);
-
     formData.append("body", jsonBlob, "userProfile.json");
 
     const response = await fetch(

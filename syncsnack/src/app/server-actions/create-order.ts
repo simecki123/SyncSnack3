@@ -41,7 +41,7 @@ async function sendCreateOrderRequest(
     body: JSON.stringify(toSendObject),
   });
   if (!res.ok) {
-    throw new Error("You already have an order on this event!");
+    throw new Error(`You already have an order on this event!`);
   }
 }
 

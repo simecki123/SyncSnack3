@@ -20,7 +20,6 @@ export async function handleRolesChange(prevState: any, formData: FormData) {
       message: `${validatedFields.error.flatten().fieldErrors.user}${validatedFields.error.flatten().fieldErrors.admin}${validatedFields.error.flatten().fieldErrors.president}`,
     };
   }
-  console.log(validatedFields.data);
   const res = await fetch("http://localhost:3000/api/roles", {
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +27,6 @@ export async function handleRolesChange(prevState: any, formData: FormData) {
     method: "POST",
     body: JSON.stringify(validatedFields.data),
   });
-  console.log("status of the request", res.status);
   if (res.status !== 200) {
     return { message: "Something went wrong" };
   }

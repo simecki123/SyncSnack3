@@ -4,6 +4,5 @@ export async function getClientMongo() {
 
   const client = new MongoClient(url);
   await client.connect();
-  console.log("Connected successfully to server");
   return client;
 }

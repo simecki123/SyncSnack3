@@ -13,8 +13,7 @@ export default function DragAndDropProfilePicture({
   setProfilePicture,
   onClose,
 }: any) {
-  const { data: session, status: sessionStatus } = useSession();
-  console.log("some auth stuff: ", session, sessionStatus);
+  const { data: session, status: sessionStatus }: any = useSession();
   const [uploadStatus, setUploadStatus] = useState<string>("");
   const [errorDetails, setErrorDetails] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,14 +33,9 @@ export default function DragAndDropProfilePicture({
       return;
     }
 
-    console.log("session", session);
-    console.log("status", sessionStatus);
-
     for (const file of files) {
       const formData = new FormData();
       formData.append("file", file);
-
-      console.log("user token", session.user.accessToken);
 
       try {
         setLoading(true);
@@ -69,7 +63,7 @@ export default function DragAndDropProfilePicture({
             `Error ${response.status}: ${JSON.stringify(errorResponse)}`,
           );
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error uploading file:", error); // Log error details
         setUploadStatus("An error occurred while uploading the file.");
         setErrorDetails(`custom er:${error.message}`);

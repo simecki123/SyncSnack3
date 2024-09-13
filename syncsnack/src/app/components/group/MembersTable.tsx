@@ -166,7 +166,6 @@ function kickUser(toKickUser: any, jwtToken: any, toast: any): void {
   )
     .then((res) => {
       if (!res.ok) {
-        console.log("cant kick", res.status);
         toast({
           title: "Can't kick user",
           description: "You are not allowed to kick this user",
@@ -184,7 +183,6 @@ function kickUser(toKickUser: any, jwtToken: any, toast: any): void {
       }
     })
     .catch((error: any) => {
-      console.log("cant kick", error.message);
       toast({
         title: "Can't kick user",
         description: "You are not allowed to kick this user",

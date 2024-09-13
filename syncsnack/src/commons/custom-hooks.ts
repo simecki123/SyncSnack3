@@ -81,7 +81,6 @@ export function useMembersData(
             setLoading(false);
           })
           .catch((error) => {
-            console.log("FAILED TO GET NEW ROLES", error.message);
             setLoading(false);
           });
       })
@@ -122,7 +121,6 @@ export function useMembersData(
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("user roles in the members data table fetch", data);
         setUserRoles(data.roles);
       })
       .catch((e) => console.log("puca u /api/groups/roles", e.message));

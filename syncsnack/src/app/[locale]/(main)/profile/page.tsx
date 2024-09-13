@@ -44,6 +44,7 @@ async function fetchProfileOrdersStats(activeUser: any) {
   )
     .then((res) => res.json())
     .catch((err) => console.error(err));
+  console.log("userProfileOrderStats", userProfileOrderStats);
   return fillMissingCounts(userProfileOrderStats);
 }
 

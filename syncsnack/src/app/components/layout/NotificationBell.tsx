@@ -29,7 +29,6 @@ export default function NotificationBell() {
     status,
     setNotifications,
     groupEventContext.setGroupEvents,
-    groupEventContext.groupEvents,
   );
 
   const bgColor = useColorModeValue("xblue.500", "xblue.400");
@@ -65,7 +64,6 @@ function useSubscribeToWS(
   status: any,
   setNotifications: any,
   setGroupEvents: any,
-  groupEvents: any,
 ) {
   const clientRef = useRef<Client | null>(null);
   useEffect(() => {
@@ -98,6 +96,7 @@ function useSubscribeToWS(
             // this is for the event
             `/topic/users/${activeUser.userProfileId}`,
             (message: any) => {
+              console.log("message", JSON.parse(message.body));
               if (
                 JSON.parse(message.body).userProfileId !==
                 activeUser.userProfileId
@@ -105,6 +104,7 @@ function useSubscribeToWS(
                 setIsBellNotified(true);
                 const bodyObject = JSON.parse(message.body);
                 const groupEventObject = {
+                  eventId: bodyObject.eventId,
                   title: bodyObject.title,
                   eventType: bodyObject.eventType,
                   description: bodyObject.description,

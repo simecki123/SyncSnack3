@@ -11,7 +11,6 @@ export default function EditGroupForm({ session, onClose, setReload }: any) {
   const updateSidebarContext = useContext(UpdateGroupsSidebarContext);
   const toast = useToast();
   const onDrop = useCallback((acceptedFiles: any) => {
-    console.log(acceptedFiles[0]);
     setIsSubmitButtonShown(true);
     setGroupProfileImage(acceptedFiles[0]);
   }, []);
@@ -20,7 +19,6 @@ export default function EditGroupForm({ session, onClose, setReload }: any) {
   function handleClick(): void {
     const formData = new FormData();
 
-    console.log("groupProfileImage", groupProfileImage);
     formData.append("file", groupProfileImage);
 
     setLoading(true);
@@ -65,7 +63,7 @@ export default function EditGroupForm({ session, onClose, setReload }: any) {
           <p>Drop the files here ...</p>
         ) : !groupProfileImage ? (
           <p className="font-semibold text-gray-300 flex justify-center">
-            Drag 'n' drop image
+            Drag &apos;n&apos; drop image
           </p>
         ) : (
           <p className="font-semibold text-gray-300 flex justify-center">

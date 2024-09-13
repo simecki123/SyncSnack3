@@ -16,7 +16,6 @@ export default async function JoinGroupPage({ searchParams }: any) {
   )
     .then((res) => res.status)
     .catch((e) => console.log(e));
-  console.log(groupStatus, "group status group status");
 
   if (groupStatus === 404) {
     return "you are already a member of this group";

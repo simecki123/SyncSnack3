@@ -10,6 +10,10 @@ export default function GroupEvents() {
   const groupEventContext = useContext(GroupEventsContext);
   const { data: session, status }: any = useSession();
   useGroupEvents(groupEventContext.setGroupEvents, status, session);
+  console.log(
+    "if this doesnt have eventid order post doesn't work",
+    groupEventContext.groupEvents,
+  );
 
   return (
     <Box className="mt-4 grid grid-cols-1 md:grid-cols-3 md:m-20 gap-4">
@@ -42,7 +46,7 @@ function useGroupEvents(setGroupEvents: any, status: any, session: any) {
             setGroupEvents(data);
           }
         })
-        .catch((e) => console.info(e.message));
+        .catch((e) => console.log(e.message));
     }
   }, [status]);
 }

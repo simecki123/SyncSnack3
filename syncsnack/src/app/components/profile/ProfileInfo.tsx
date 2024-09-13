@@ -12,8 +12,6 @@ export default function ProfileInfo({ userProfileData }: any) {
     userProfileData?.photoUrl,
   );
 
-  console.log("profile data: ", userProfileData);
-
   return (
     <>
       <Box className="flex flex-col justify-center items-center space-y-2">
