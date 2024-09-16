@@ -119,7 +119,12 @@ export default function MembersTable({ session }: any) {
                     >
                       Kick user
                     </Button>
-                    <Button variant="outline">Give Admin</Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => giveAdmin(member, jwtToken, toast)}
+                    >
+                      Give Admin
+                    </Button>
                   </Td>
                 ) : null}
               </Tr>
@@ -160,7 +165,7 @@ function kickUser(toKickUser: any, jwtToken: any, toast: any): void {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwtToken}`,
-        groupId: `${localStorage.getItem("groupId")}`,
+        groupId: `${localStorage.getItem("GroupId")}`,
       },
     },
   )
@@ -186,6 +191,46 @@ function kickUser(toKickUser: any, jwtToken: any, toast: any): void {
       toast({
         title: "Can't kick user",
         description: "You are not allowed to kick this user",
+        status: "error",
+        duration: 3000,
+      });
+    });
+}
+
+function giveAdmin(toGiveAdmin: any, jwtToken: any, toast: any): void {
+  fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/groups/promote?userProfileId=${toGiveAdmin.userProfileId}&role=ADMIN`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+        groupId: `${localStorage.getItem("GroupId")}`,
+      },
+    },
+  )
+    .then((res) => {
+      if (!res.ok) {
+        toast({
+          title: "Can't give admin",
+          description: "You are not allowed to give admin to this user",
+          status: "error",
+          duration: 3000,
+        });
+      } else {
+        toast({
+          title: "Gave admin",
+          description: "User has been given admin status",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    })
+    .catch((error: any) => {
+      toast({
+        title: "Can't give admin",
+        description: "You are not allowed to give admin to this user",
         status: "error",
         duration: 3000,
       });

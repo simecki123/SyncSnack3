@@ -55,7 +55,7 @@ export default function EditGroupForm({ session, onClose, setReload }: any) {
         Upload Group Image
       </Text>
       <div
-        className="border-dashed border p-10 rounded-xl bg-gray-600"
+        className="border-dashed border p-10 rounded-xl dark:bg-red-200 bg-gray-600"
         {...getRootProps()}
       >
         <input {...getInputProps()} />

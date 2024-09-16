@@ -20,9 +20,9 @@ export default function SidebarGroupDrawer({ isOpen, onClose, group }: any) {
   const { name, groupId, description } = group;
 
   return (
+    // make the placement 20 px from  the left edge of the view
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-      <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent style={{ marginLeft: "70px", width: "calc(100% - 20px)" }}>
         <DrawerCloseButton />
         <DrawerHeader>{name}</DrawerHeader>
         <DrawerBody className="flex flex-col">

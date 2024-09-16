@@ -4,6 +4,7 @@ import {
   Button,
   IconButton,
   Image,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import SidebarGroupDrawer from "./SidebarDrawer";
@@ -56,8 +57,13 @@ export default function SidebarGroups({ accessToken }: any) {
     onClose: onGroupModalClose,
   } = useDisclosure();
 
+  const drawerBgColor = useColorModeValue("gray.200", "gray.700");
+
   return (
-    <Box className="flex flex-col space-y-2 p-2 h-full">
+    <Box
+      className="flex flex-col space-y-2 p-2 h-full shadow-lg"
+      bgColor={drawerBgColor}
+    >
       {groups.map((group: any, index: number) => (
         <Image
           key={index}

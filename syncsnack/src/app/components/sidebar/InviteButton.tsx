@@ -30,20 +30,37 @@ function handleInvite(setUrl: any, session: any, toast: any) {
       },
     },
   )
-    .then((res) => res.text())
-    .then((data) => {
-      setUrl(data);
-      toast({
-        title: "Invitation sent!",
-        description: "Your invitation link is ready to be shared.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
+    .then((res) => {
+      if (res.status === 429) {
+        toast({
+          title: "Too many requests",
+          description: "Please try again later.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+        return null;
+      }
+      return res.text();
+    })
+    .then((data: any) => {
+      console.log("data in the invite button", data);
+      if (data) {
+        setUrl(data);
+        toast({
+          title: "Invitation sent!",
+          description: "Your invitation link is ready to be shared.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
 
-      const lista = data.split("/");
-      const code = lista[lista.length - 1];
-      navigator.clipboard.writeText(`http://localhost:3000/join?code=${code}`);
+        const lista = data.split("/");
+        const code = lista[lista.length - 1];
+        navigator.clipboard.writeText(
+          `http://localhost:3000/join?code=${code}`,
+        );
+      }
     })
     .catch((e) => console.log(e));
 }

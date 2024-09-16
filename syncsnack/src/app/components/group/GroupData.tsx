@@ -45,62 +45,68 @@ export default function GroupData({ session }: any) {
   }
 
   return (
-    <Box className="flex items-center space-x-4 justify-center">
-      <Box position="relative">
-        <Image
-          objectFit="cover"
-          rounded="full"
-          boxSize={44}
-          borderRadius="full"
-          border="solid"
-          borderColor="xblue.400"
-          borderWidth={3}
-          src={group.photoUrl}
-          fallbackSrc="/fallback-group.png"
-        />
-        <Heading
-          position="absolute"
-          top="20%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="white"
-          fontWeight="bold"
-          zIndex="1"
-          className="text-2xl"
-        >
-          &nbsp;
-        </Heading>
-      </Box>
-      <Box className="flex flex-col items-center">
-        <Heading>{group.name}</Heading>
-        <Text>{group.description}</Text>
-        <Box className="flex space-x-2 mt-2 justify-center">
-          <Text className="font-bold italic">Your roles:</Text>
-          {userRoles &&
-            userRoles.map((role: any, index: any) => {
-              return (
-                <Box key={index}>
-                  <Tag colorScheme="xorange">{role}</Tag>
-                </Box>
-              );
-            })}
+    <>
+      {typeof group === "undefined" ? (
+        <Text>No group found</Text>
+      ) : (
+        <Box className="flex items-center space-x-4 justify-center">
+          <Box position="relative">
+            <Image
+              objectFit="cover"
+              rounded="full"
+              boxSize={44}
+              borderRadius="full"
+              border="solid"
+              borderColor="xblue.400"
+              borderWidth={3}
+              src={group.photoUrl}
+              fallbackSrc="/fallback-group.png"
+            />
+            <Heading
+              position="absolute"
+              top="20%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              color="white"
+              fontWeight="bold"
+              zIndex="1"
+              className="text-2xl"
+            >
+              &nbsp;
+            </Heading>
+          </Box>
+          <Box className="flex flex-col items-center">
+            <Heading>{group.name}</Heading>
+            <Text>{group.description}</Text>
+            <Box className="flex space-x-2 mt-2 justify-center">
+              <Text className="font-bold italic">Your roles:</Text>
+              {userRoles &&
+                userRoles.map((role: any, index: any) => {
+                  return (
+                    <Box key={index}>
+                      <Tag colorScheme="xorange">{role}</Tag>
+                    </Box>
+                  );
+                })}
+            </Box>
+            <Button
+              onClick={onOpen}
+              variant="outline"
+              colorScheme="xblue"
+              className="mt-10"
+            >
+              Edit Group
+            </Button>
+          </Box>
+          <EditGroupModal
+            onClose={onClose}
+            isOpen={isOpen}
+            session={session}
+            setReload={setReload}
+          />
         </Box>
-        <Button
-          onClick={onOpen}
-          variant="outline"
-          colorScheme="xblue"
-          className="mt-10"
-        >
-          Edit Group
-        </Button>
-      </Box>
-      <EditGroupModal
-        onClose={onClose}
-        isOpen={isOpen}
-        session={session}
-        setReload={setReload}
-      />
-    </Box>
+      )}
+    </>
   );
 }
 
@@ -127,7 +133,7 @@ function useGroupData(
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching group data:", error);
+        console.log("Error fetching group data:", error);
       });
   }, [session, jwtToken, reload]);
 }

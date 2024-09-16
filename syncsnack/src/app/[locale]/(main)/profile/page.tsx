@@ -43,8 +43,11 @@ async function fetchProfileOrdersStats(activeUser: any) {
     },
   )
     .then((res) => res.json())
-    .catch((err) => console.error(err));
+    .catch((err) => console.log("The error starts here:", err));
   console.log("userProfileOrderStats", userProfileOrderStats);
+  if (!userProfileOrderStats) {
+    return fillMissingCounts([]);
+  }
   return fillMissingCounts(userProfileOrderStats);
 }
 
