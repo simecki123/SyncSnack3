@@ -33,7 +33,7 @@ async function fetchProfileData(activeUser: any) {
 }
 
 async function fetchProfileOrdersStats(activeUser: any) {
-  const userProfileOrderStats = await fetch(
+  const res = await fetch(
     `${process.env.BACKEND_URL}/api/profiles/orders/stats`,
     {
       headers: {
@@ -41,14 +41,15 @@ async function fetchProfileOrdersStats(activeUser: any) {
         Authorization: `Bearer ${activeUser.accessToken}`,
       },
     },
-  )
-    .then((res) => res.json())
-    .catch((err) => console.log("The error starts here:", err));
-  console.log("userProfileOrderStats", userProfileOrderStats);
-  if (!userProfileOrderStats) {
+  );
+
+  if (!res.ok) {
+    console.log("status of res", res.status);
     return fillMissingCounts([]);
   }
-  return fillMissingCounts(userProfileOrderStats);
+
+  const stats = await res.json();
+  return fillMissingCounts(stats);
 }
 
 type OrderStatusType = {
